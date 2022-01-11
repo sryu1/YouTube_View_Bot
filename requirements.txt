@@ -1,2 +1,2 @@
-selenium
-flask
+selenium==4.1.0
+flask==2.0.2
