@@ -1,4 +1,4 @@
-This is a YouTube bot coded in python.
+A YouTube bot coded in python.
 
 https://www.github.com/sryu1/YouTube_View_Bot
 
