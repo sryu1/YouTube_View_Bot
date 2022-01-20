@@ -7,7 +7,7 @@ This bot is created for educational purposes, for people to download and play ar
 WARNING! USE THIS BOT IN YOUR OWN RISK, I CANNOT DO ANYTHING IF YOU GET BANNED BY YOUTUBE OR ANYTHING SIMILAR.
 THE BOT WILL ONLY WORK WITH ONLY ONE IP ADDRESS, YOUR LOCAL IP ADDRESS.
 
-Easiest way to run bot: open Runbot.bat
+Easiest way to run bot: open Runbot.bat- you will need to have python on path.
 
 General method:
 
