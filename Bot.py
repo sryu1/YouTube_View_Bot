@@ -27,8 +27,7 @@ def wsviewcount():
 
 
 def play_video(drivers):
-    drivers[i].find_element_by_css_selector(
-        '[title^="Play (k)"]').click()
+    drivers[i].find_element_by_css_selector('[title^="Play (k)"]').click()
 
 
 for i in range(number_of_drivers):
