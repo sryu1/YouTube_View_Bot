@@ -10,7 +10,7 @@ WILL ONLY WORK WITH ONLY ONE IP ADDRESS, YOUR LOCAL IP ADDRESS.
 To run bot, open Run Bot.bat - You may need to add python to PATH. 
 To run the GUI (Graphical User Interface) version of the bot, open Run GUI Bot.bat - You may need to add python to path
 You are required to click "Enter" after entering the values for each textbox.
-
+If you already have the modules downloaded and installed (selenium and flask), you can just open Bot.py or GUI Bot.py.
 The bot status, open another terminal to the same folder and type
 "python Bot Status\Bot Status.py" this should give you an ip address and with a port number. If you click on the link,
 it will open a browser with some information about the bot. If you would like to see an updated version of the stats,
