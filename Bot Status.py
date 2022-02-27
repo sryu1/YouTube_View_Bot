@@ -1,14 +1,14 @@
 from flask import Flask
 
-views = open("views.txt", "r")
+views = open("Bot Status/views.txt", "r")
 wsviews = views.read()
 views.close()
 
-url = open("url.txt", "r")
+url = open("Bot Status/url.txt", "r")
 wsurl = url.read()
 url.close()
 
-viewcount = open("viewcount.txt", "r")
+viewcount = open("Bot Status/viewcount.txt", "r")
 wsviewcount = viewcount.read()
 viewcount.close()
 
@@ -18,7 +18,9 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Watched " + wsurl + " " + wsviewcount + " out of " + wsviews + " views."
+    return "Watching " + wsurl + " " + wsviewcount + " out of " + wsviews + " views." \
+                                                                            " To get an updated status of the bot, " \
+                                                                            "stop the webserver code and run it again"
 
 
-app.run(host='0.0.0.0', port=8080)
+app.run(host='0.0.0.0', port=0)

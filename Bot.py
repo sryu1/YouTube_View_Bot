@@ -1,5 +1,4 @@
 import time
-import subprocess
 import os
 import random
 from selenium import webdriver
@@ -46,7 +45,7 @@ while True:
 
     print("viewcount= " + str(viewcount))
     if int(views) <= int(viewcount):
-        subprocess.call(r"killprocess.bat")
+        quit()
         print("the listed amount has been viewed")
         os.system("pause")
         exit()
