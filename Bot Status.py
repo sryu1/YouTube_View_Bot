@@ -1,3 +1,4 @@
+# The webserver won't help that much...
 from flask import Flask
 
 views = open("Bot Status/views.txt", "r")
