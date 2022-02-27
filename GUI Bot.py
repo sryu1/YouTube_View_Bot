@@ -68,7 +68,7 @@ def start_bot():
         viewcount += 1
         wsviewcount()
 
-        status = Label(text="watching video " + str(viewcount) + "out of " + str(views) + "times")
+        status = Label(text="watching video " + str(viewcount) + " out of " + str(views) + " times")
         print("viewcount: " + str(viewcount))
         status.pack()
         if int(views) <= int(viewcount):
