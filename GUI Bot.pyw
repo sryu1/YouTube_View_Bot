@@ -69,12 +69,10 @@ def start_bot():
         wsviewcount()
 
         status = Label(text="watching video " + str(viewcount) + " out of " + str(views) + " times")
-        print("viewcount: " + str(viewcount))
         status.pack()
         if int(views) <= int(viewcount):
             quit()
             Label(text="the listed amount has been viewed").pack()
-            print("The listed amount of has been viewed")
             os.system("pause")
             exit()
         elif int(views) > int(viewcount):

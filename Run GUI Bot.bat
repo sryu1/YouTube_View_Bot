@@ -9,4 +9,4 @@ echo MAKE SURE YOU HAVE CHROMEDRIVER IN YOUR PYTHON PROGRAM DIRECTORY!!!
 echo continue if you do have chromedriver
 pause
 color B
-py "GUI Bot.py"
+py "GUI Bot.pyw"
