@@ -1,7 +1,6 @@
 @echo off
 py -m ensurepip --upgrade
-py -m pip install selenium
-py -m pip install flask
+py -m pip install -r requirements.txt
 echo -----------------------------------------------------------------------------------------------------------------------
 Pause
 color C
