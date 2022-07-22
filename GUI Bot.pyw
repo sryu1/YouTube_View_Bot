@@ -4,6 +4,7 @@ import time
 import random
 import os
 from selenium import webdriver
+from selenium.webdriver import ActionChains
 
 # Top level window
 frame = tk.Tk()
@@ -54,13 +55,15 @@ def start_bot():
         wsvc.close()
 
     def play_video(drivers):
-        drivers[i].find_element_by_css_selector('[title^="Play (k)"]').click()
+        ActionChains(drivers[i]) \
+            .send_keys("k") \
+            .perform()
 
     for i in range(int(number_of_drivers)):
         webserver = Label(text="open Bot Status.py to see the progress of the bot")
-        drivers.append(webdriver.Chrome(executable_path="chromedriver"))
         options = webdriver.ChromeOptions()
         options.add_experimental_option("excludeSwitches", ["enable-logging"])
+        drivers.append(webdriver.Chrome(options=options, executable_path=r"chromedriver"))
         drivers[i].get(random.choice(sites))
         drivers[i].get(url)
         play_video(drivers)
