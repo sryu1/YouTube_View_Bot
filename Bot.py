@@ -44,7 +44,6 @@ for i in range(number_of_drivers):
     drivers[i].get(random.choice(sites))
     drivers[i].get(url)
     play_video(drivers)
-
 while True:
     time.sleep(time_to_refresh)
     viewcount += 1
@@ -52,10 +51,11 @@ while True:
 
     print("viewcount= " + str(viewcount))
     if int(views) <= int(viewcount):
-        quit()
+        drivers[i].quit()
         print("the listed amount has been viewed")
         os.system("pause")
         exit()
     elif int(views) > int(viewcount):
         for i in range(number_of_drivers):
             drivers[i].refresh()
+
