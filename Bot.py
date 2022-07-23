@@ -4,6 +4,9 @@ import random
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 
+import chromedriver_autoinstaller
+
+chromedriver_autoinstaller.install()
 viewcount = 0
 views = input("how many views would you like: ")
 number_of_drivers = int(input("Enter the number of tabs you want open: "))

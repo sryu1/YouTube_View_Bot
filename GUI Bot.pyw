@@ -5,7 +5,9 @@ import random
 import os
 from selenium import webdriver
 from selenium.webdriver import ActionChains
+import chromedriver_autoinstaller
 
+chromedriver_autoinstaller.install()
 # Top level window
 frame = tk.Tk()
 frame.title("TextBox Input")
