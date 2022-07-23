@@ -7,15 +7,16 @@ This bot is created for educational purposes, for people to download and play ar
 WARNING! USE THIS BOT IN YOUR OWN RISK, I CANNOT DO ANYTHING IF YOU GET BANNED BY YOUTUBE OR ANYTHING SIMILAR. THE BOT
 WILL ONLY WORK WITH ONLY ONE IP ADDRESS, YOUR LOCAL IP ADDRESS.
 
-To run bot, open Run Bot.bat - You may need to add python to PATH. 
-To run the GUI (Graphical User Interface) version of the bot, open Run GUI Bot.bat - You may need to add python to PATH.
-You are required to click "Enter" after entering the values for each textbox.
-If you already have the modules downloaded and installed (selenium and flask), you can just open Bot.py or GUI Bot.py.
-Make sure your chromedriver version is the same as your Chrome browser version.
 
-To see the bot status, open another terminal to the same folder and type
-"python Bot Status\Bot Status.py" this should give you an ip address and with a port number. If you click on the link,
-it will open a browser with some status of the bot. If you would like to see an updated version of the stats,
+To run the bot, First, open setup.py to install necessary modules. You may need to add python to PATH.
+After that, open Bot.py and follow the instructions prompted by the bot.
+To run the GUI (Graphical User Interface) version of the bot, open GUI Bot.py.
+You are required to click "Enter" after entering the values for each textbox.
+
+
+To see the bot status, open open Bot Status.py 
+This should give you an ip address and with a port number. If you copy on the link and the host address and paste it in your browser,
+it will show some status of the bot. If you would like to see an updated version of the stats,
 you must exit the bot status python file and reopen it. 
 
 Use "killprocess.bat" if you have any errors with chrome drivers. THIS WILL CLOSE ALL CHROMEDRIVER INSTANCES!
