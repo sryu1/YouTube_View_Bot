@@ -8,7 +8,7 @@ from selenium.webdriver import ActionChains
 import chromedriver_autoinstaller
 
 chromedriver_autoinstaller.install()
-# Top level window
+
 frame = tk.Tk()
 frame.title("TextBox Input")
 frame.geometry('800x600')
@@ -92,7 +92,7 @@ views_input = tk.Text(frame, height=5, width=20)
 view_text.pack()
 views_input.pack()
 
-# Button Creation
+
 views_button = tk.Button(frame, text="Enter", command=views_print)
 views_button.pack()
 
