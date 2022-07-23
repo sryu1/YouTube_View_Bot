@@ -1,4 +1,4 @@
 # Install these modules
-selenium==4.1.0
+selenium
 flask
 chromedriver-autoinstaller
