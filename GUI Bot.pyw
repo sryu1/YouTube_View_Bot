@@ -92,7 +92,6 @@ views_input = tk.Text(frame, height=5, width=20)
 view_text.pack()
 views_input.pack()
 
-
 views_button = tk.Button(frame, text="Enter", command=views_print)
 views_button.pack()
 

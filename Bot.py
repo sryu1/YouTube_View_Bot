@@ -32,8 +32,8 @@ def wsviewcount():
 
 def play_video(drivers):
     ActionChains(drivers[i]) \
-    .send_keys("k") \
-    .perform()
+        .send_keys("k") \
+        .perform()
 
 
 for i in range(number_of_drivers):
