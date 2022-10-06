@@ -37,7 +37,6 @@ def play_video(drivers):
 
 
 for i in range(number_of_drivers):
-    print("open Bot Status.py to see the progress of the bot")
     options = webdriver.ChromeOptions()
     options.add_experimental_option("excludeSwitches", ["enable-logging"])
     drivers.append(webdriver.Chrome(options=options, executable_path=r"chromedriver"))
