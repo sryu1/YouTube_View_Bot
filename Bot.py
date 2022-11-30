@@ -3,7 +3,6 @@ import os
 import random
 from selenium import webdriver
 from selenium.webdriver import ActionChains
-
 import chromedriver_autoinstaller
 
 chromedriver_autoinstaller.install()
@@ -38,6 +37,7 @@ def play_video(drivers):
 
 for i in range(number_of_drivers):
     options = webdriver.ChromeOptions()
+    options.add_argument("--mute-audio")
     options.add_experimental_option("excludeSwitches", ["enable-logging"])
     drivers.append(webdriver.Chrome(options=options, executable_path=r"chromedriver"))
     drivers[i].get(random.choice(sites))
@@ -57,4 +57,3 @@ while True:
     elif int(views) > int(viewcount):
         for i in range(number_of_drivers):
             drivers[i].refresh()
-

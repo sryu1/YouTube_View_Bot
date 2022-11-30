@@ -63,6 +63,7 @@ def start_bot():
 
     for i in range(int(number_of_drivers)):
         options = webdriver.ChromeOptions()
+        options.add_argument("--mute-audio")
         options.add_experimental_option("excludeSwitches", ["enable-logging"])
         drivers.append(webdriver.Chrome(options=options, executable_path=r"chromedriver"))
         drivers[i].get(random.choice(sites))
