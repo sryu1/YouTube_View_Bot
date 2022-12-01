@@ -17,7 +17,6 @@ def config():
 
         headless = input(
             "Would you like to run the bot in headless mode? (y/n): ")
-        print(hdls(headless))
 
         def sdop(mute):
             if mute == "y":
@@ -27,7 +26,6 @@ def config():
 
         sound = input(
             "Would you like to mute the videos while they are playing? (y/n): ")
-        print(sdop(sound))
         configs = {
             "Headless": str(hdls(headless)),
             "Mute": str(sdop(sound))
