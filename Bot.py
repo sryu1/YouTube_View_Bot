@@ -15,7 +15,8 @@ def config():
             if headless == "n":
                 return False
 
-        headless = input("Would you like to run the bot in headless mode? (y/n): ")
+        headless = input(
+            "Would you like to run the bot in headless mode? (y/n): ")
         print(hdls(headless))
 
         def sdop(mute):
@@ -24,7 +25,8 @@ def config():
             if mute == "n":
                 return False
 
-        sound = input("Would you like to mute the videos while they are playing? (y/n): ")
+        sound = input(
+            "Would you like to mute the videos while they are playing? (y/n): ")
         print(sdop(sound))
         configs = {
             "Headless": str(hdls(headless)),
@@ -34,7 +36,8 @@ def config():
         with open("config.json", "w") as jsonfile:
             jsonfile.write(json_file)
     else:
-        config_options = input("Would you like to use the previous settings for Headless mode and Sound? (y/n): ")
+        config_options = input(
+            "Would you like to use the previous settings for Headless mode and Sound? (y/n): ")
         if config_options == "y":
             pass
         else:
@@ -44,7 +47,8 @@ def config():
                 if headless == "n":
                     return False
 
-            headless = input("Would you like to run the bot in headless mode? (y/n): ")
+            headless = input(
+                "Would you like to run the bot in headless mode? (y/n): ")
             print(hdls(headless))
 
             def sdop(mute):
@@ -53,7 +57,8 @@ def config():
                 if mute == "n":
                     return False
 
-            sound = input("Would you like to mute the videos while they are playing? (y/n): ")
+            sound = input(
+                "Would you like to mute the videos while they are playing? (y/n): ")
             print(sdop(sound))
             configs = {
                 "Headless": str(hdls(headless)),
@@ -109,7 +114,8 @@ for i in range(number_of_drivers):
     else:
         options.add_argument("--mute-audio")
     options.add_experimental_option("excludeSwitches", ["enable-logging"])
-    drivers.append(webdriver.Chrome(options=options, executable_path=r"chromedriver"))
+    drivers.append(webdriver.Chrome(options=options,
+                   executable_path=r"chromedriver"))
     drivers[i].get(random.choice(sites))
     drivers[i].get(url)
     play_video(drivers)
