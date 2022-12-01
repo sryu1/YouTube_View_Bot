@@ -1,4 +1,6 @@
-A YouTube bot coded in python
+# YouTube View Bot
+
+## A YouTube bot coded in python
 
 https://www.github.com/sryu1/YouTube_View_Bot
 

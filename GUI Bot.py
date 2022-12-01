@@ -1,11 +1,81 @@
-import tkinter as tk
-from tkinter import *
 import time
 import random
 import os
+import json
+import tkinter as tk
+from tkinter import *
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 import chromedriver_autoinstaller
+
+
+def config():
+    if not os.path.isfile('config.json'):
+        def hdls(headless):
+            if headless == "y":
+                return True
+            if headless == "n":
+                return False
+
+        headless = input(
+            "Would you like to run the bot in headless mode? (y/n): ")
+        print(hdls(headless))
+
+        def sdop(mute):
+            if mute == "y":
+                return True
+            if mute == "n":
+                return False
+
+        sound = input(
+            "Would you like to mute the videos while they are playing? (y/n): ")
+        print(sdop(sound))
+        configs = {
+            "Headless": str(hdls(headless)),
+            "Mute": str(sdop(sound))
+        }
+        json_file = json.dumps(configs)
+        with open("config.json", "w") as jsonfile:
+            jsonfile.write(json_file)
+    else:
+        config_options = input(
+            "Would you like to use the previous settings for Headless mode and Sound? (y/n): ")
+        if config_options == "y":
+            pass
+        else:
+            def hdls(headless):
+                if headless == "y":
+                    return True
+                if headless == "n":
+                    return False
+
+            headless = input(
+                "Would you like to run the bot in headless mode? (y/n): ")
+            print(hdls(headless))
+
+            def sdop(mute):
+                if mute == "y":
+                    return True
+                if mute == "n":
+                    return False
+
+            sound = input(
+                "Would you like to mute the videos while they are playing? (y/n): ")
+            print(sdop(sound))
+            configs = {
+                "Headless": str(hdls(headless)),
+                "Mute": str(sdop(sound))
+            }
+            json_file = json.dumps(configs)
+            with open("config.json", "w") as jsonfile:
+                jsonfile.write(json_file)
+
+
+config()
+
+with open("config.json", "r") as jsonfile:
+    json_options = json.load(jsonfile)
+    jsonfile.close()
 
 chromedriver_autoinstaller.install()
 
@@ -63,9 +133,15 @@ def start_bot():
 
     for i in range(int(number_of_drivers)):
         options = webdriver.ChromeOptions()
-        options.add_argument("--mute-audio")
+        if json_options["Headless"] == "True":
+            options.add_argument("--headless")
+        if json_options["Mute"] == "False":
+            pass
+        else:
+            options.add_argument("--mute-audio")
         options.add_experimental_option("excludeSwitches", ["enable-logging"])
-        drivers.append(webdriver.Chrome(options=options, executable_path=r"chromedriver"))
+        drivers.append(webdriver.Chrome(options=options,
+                       executable_path=r"chromedriver"))
         drivers[i].get(random.choice(sites))
         drivers[i].get(url)
         play_video(drivers)
@@ -74,7 +150,8 @@ def start_bot():
         viewcount += 1
         wsviewcount()
 
-        status = Label(text="watching video " + str(viewcount) + " out of " + str(views) + " times")
+        status = Label(text="watching video " + str(viewcount) +
+                       " out of " + str(views) + " times")
         status.pack()
         if int(views) <= int(viewcount):
             drivers[i].quit()
