@@ -1,5 +1,11 @@
+import time
+import random
 import tkinter
 import customtkinter
+import json
+from selenium import webdriver
+from selenium.webdriver import ActionChains
+import chromedriver_autoinstaller
 
 customtkinter.set_appearance_mode("System")
 customtkinter.set_default_color_theme("blue")
