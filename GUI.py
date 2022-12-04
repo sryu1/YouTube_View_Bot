@@ -41,7 +41,6 @@ def main():
         write_settings()
         chromedriver_autoinstaller.install()
         viewcount = 0
-
         drivers = []
         sites = ['https://search.yahoo.com/', 'https://duckduckgo.com/', 'https://www.google.com/',
                  'https://www.bing.com/', 'https://t.co/', 'https://youtube.com']
@@ -49,10 +48,8 @@ def main():
         number_of_drivers = int(tab_box.get())
         time_to_refresh = int(watchtime_box.get())
         url = link_box.get()
-
         wsviews = open("Bot Status/views.txt", 'w')
         wsurl = open("Bot Status/url.txt", 'w')
-
         wsviews.write(str(views))
         wsviews.close()
         wsurl.write(url)
@@ -74,9 +71,10 @@ def main():
                 options.add_argument("--headless")
             if json_options["Mute"] == 1:
                 options.add_argument("--mute-audio")
-            options.add_experimental_option("excludeSwitches", ["enable-logging"])
+            options.add_experimental_option(
+                "excludeSwitches", ["enable-logging"])
             drivers.append(webdriver.Chrome(options=options,
-                                            executable_path=r"chromedriver"))
+                           executable_path=r"chromedriver"))
             drivers[i].get(random.choice(sites))
             drivers[i].get(url)
             play_video(drivers)
@@ -94,7 +92,6 @@ def main():
                     drivers[i].refresh()
 
     # Border
-
     border = customtkinter.CTkFrame(master=app)
     border.pack(pady=20, padx=20, fill="both", expand=True)
 
@@ -116,30 +113,35 @@ def main():
     progress = customtkinter.CTkProgressBar(master=border)
     progress.set(0.0)
     # Number of views
-    view_number = customtkinter.CTkLabel(master=border, justify=tkinter.LEFT, text="Views (1-50)")
-    view_number.pack(pady=10, padx=10)
+    view_label = customtkinter.CTkLabel(
+        master=border, justify=tkinter.LEFT, text="Views (1-50)")
+    view_label.pack(pady=10, padx=10)
     view_slider = customtkinter.CTkSlider(master=border, from_=1, to=50)
     view_slider.pack(pady=10, padx=10)
     view_slider.set(20)
 
     # Number of tabs
-    tab_box = customtkinter.CTkEntry(master=border, width=200, placeholder_text="Number of tabs")
+    tab_box = customtkinter.CTkEntry(
+        master=border, width=200, placeholder_text="Number of tabs")
     tab_box.pack(pady=10, padx=10)
 
     # Watch time
-    watchtime_box = customtkinter.CTkEntry(master=border, width=200, placeholder_text="Watch time (seconds)")
+    watchtime_box = customtkinter.CTkEntry(
+        master=border, width=200, placeholder_text="Watch time (seconds)")
     watchtime_box.pack(pady=10, padx=10)
 
     # Link
-    link_box = customtkinter.CTkEntry(master=border, width=400, placeholder_text="Link")
+    link_box = customtkinter.CTkEntry(
+        master=border, width=400, placeholder_text="Link")
     link_box.pack(pady=10, padx=10)
 
     # Start Button
-    button_1 = customtkinter.CTkButton(master=border, command=threading.Thread(target=start_bot).start,
-                                       text="Start Bot")
+    button_1 = customtkinter.CTkButton(master=border, command=threading.Thread(
+        target=start_bot).start, text="Start Bot")
     button_1.pack(pady=10, padx=10)
 
     progress.pack(pady=10, padx=10)
+
     app.mainloop()
 
 
