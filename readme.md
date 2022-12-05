@@ -11,13 +11,8 @@ WARNING! USE THIS BOT IN YOUR OWN RISK, I CANNOT DO ANYTHING IF YOU GET BANNED B
 
 To run the bot, First, open setup.py to install necessary modules. You may need to add python to PATH.
 After that, open Bot.py and follow the instructions prompted by the bot.
-To run the GUI (Graphical User Interface) version of the bot, open GUI Bot.py.
+To run the GUI (Graphical User Interface) version of the bot, open GUI.py.
 You are required to click "Enter" after entering the values for each textbox.
-
-
-To see the bot status, open Bot Status.py - This is an experimental feature
-This should give you an ip address and with a port number. If you copy on the link and the host address and paste it in your browser, it will show some status of the bot. If you would like to see an updated version of the stats,
-you must exit the bot status python file and reopen it. 
 
 Use "killprocess.bat" if you have any errors with chrome drivers. THIS WILL CLOSE ALL CHROMEDRIVER INSTANCES!
 
