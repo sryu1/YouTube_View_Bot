@@ -11,7 +11,7 @@ WARNING! USE THIS BOT IN YOUR OWN RISK, I CANNOT DO ANYTHING IF YOU GET BANNED B
 
 To run the bot, First, open setup.py to install necessary modules. You may need to add python to PATH.
 After that, open Bot.py and follow the instructions prompted by the bot.
-To run the GUI (Graphical User Interface) version of the bot, open GUI.py.
+To run the GUI (Graphical User Interface) version of the bot, open GUI.pyw.
 You are required to click "Enter" after entering the values for each textbox.
 
 Use "killprocess.bat" if you have any errors with chrome drivers. THIS WILL CLOSE ALL CHROMEDRIVER INSTANCES!
