@@ -111,14 +111,14 @@ for i in range(number_of_drivers):
         options.add_argument("--mute-audio")
     options.add_experimental_option("excludeSwitches", ["enable-logging"])
     drivers.append(webdriver.Chrome(options=options,
-                   executable_path=r"chromedriver"))
+                                    executable_path=r"chromedriver"))
     drivers[i].get(random.choice(sites))
     drivers[i].get(url)
     play_video(drivers)
 
 while True:
     time.sleep(time_to_refresh)
-    viewcount += 1
+    viewcount += number_of_drivers
     wsviewcount()
 
     print("view count = " + str(viewcount))
