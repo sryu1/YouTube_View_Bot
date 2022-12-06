@@ -37,6 +37,10 @@ def main():
         views = int(view_slider.get())
         progress.set(wsviewcount / views)
 
+    def views_update(self):
+        view_value = str(int(view_slider.get()))
+        view_label.configure(text=f"{view_value} Views")
+
     def start_bot():
         write_settings()
         chromedriver_autoinstaller.install()
@@ -112,11 +116,13 @@ def main():
     # Bot Progress
     progress = customtkinter.CTkProgressBar(master=border)
     progress.set(0.0)
+
     # Number of views
+    view_value = 20
     view_label = customtkinter.CTkLabel(
-        master=border, justify=tkinter.LEFT, text="Views (1-50)")
+        master=border, justify=tkinter.LEFT, text=f"{view_value} Views")
+    view_slider = customtkinter.CTkSlider(master=border, from_=1, to=50, command=views_update)
     view_label.pack(pady=10, padx=10)
-    view_slider = customtkinter.CTkSlider(master=border, from_=1, to=50)
     view_slider.pack(pady=10, padx=10)
     view_slider.set(20)
 
