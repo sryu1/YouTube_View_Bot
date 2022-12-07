@@ -1,6 +1,4 @@
 # Install these modules
 selenium
-flask
-chromedriver-autoinstaller
-future
 customtkinter
+chromedriver-autoinstaller

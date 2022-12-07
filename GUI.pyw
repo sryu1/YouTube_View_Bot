@@ -12,10 +12,10 @@ import chromedriver_autoinstaller
 def main():
     customtkinter.set_appearance_mode("System")
     customtkinter.set_default_color_theme("blue")
-
     app = customtkinter.CTk()
     app.geometry("800x600")
     app.title("YouTube View Bot")
+    app.iconbitmap("Icon.ico")
 
     with open("config.json", "r") as jsonfile:
         json_options = json.load(jsonfile)
