@@ -1,4 +1,5 @@
 import time
+import os
 import random
 import tkinter
 import customtkinter
@@ -16,6 +17,15 @@ def main():
     app.geometry("800x600")
     app.title("YouTube View Bot")
     app.iconbitmap("Icon.ico")
+
+    if not os.path.isfile('config.json'):
+        configs = {
+            "Headless": 0,
+            "Mute": 0
+        }
+        json_file = json.dumps(configs)
+        with open("config.json", "w") as jsonfile:
+            jsonfile.write(json_file)
 
     with open("config.json", "r") as jsonfile:
         json_options = json.load(jsonfile)

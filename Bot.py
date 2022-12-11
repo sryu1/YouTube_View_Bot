@@ -42,18 +42,18 @@ def main():
             else:
                 def hdls(headless):
                     if headless == "y":
-                        return True
+                        return 1
                     if headless == "n":
-                        return False
+                        return 0
 
                 headless = input(
                     "Would you like to run the bot in headless mode? (y/n): ")
 
                 def sdop(mute):
                     if mute == "y":
-                        return True
+                        return 1
                     if mute == "n":
-                        return False
+                        return 0
 
                 sound = input(
                     "Would you like to mute the videos while they are playing? (y/n): ")
@@ -100,9 +100,9 @@ def main():
 
     for i in range(number_of_drivers):
         options = webdriver.ChromeOptions()
-        if json_options["Headless"] == "True":
+        if json_options["Headless"] == 1:
             options.add_argument("--headless")
-        if json_options["Mute"] == "False":
+        if json_options["Mute"] == 0:
             pass
         else:
             options.add_argument("--mute-audio")
