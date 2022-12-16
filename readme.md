@@ -2,7 +2,7 @@
 
 ## A YouTube bot coded in python
 
-https://www.github.com/sryu1/YouTube_View_Bot
+[GitHub Repository](https://www.github.com/sryu1/YouTube_View_Bot)
 
 This bot is created for educational purposes, for people to download and play around and experiment with the codes.
 
@@ -10,8 +10,8 @@ WARNING! USE THIS BOT IN YOUR OWN RISK, I CANNOT DO ANYTHING IF YOU GET BANNED B
 WILL ONLY WORK WITH ONLY ONE IP ADDRESS, YOUR LOCAL IP ADDRESS.
 
 To run the bot, First, open setup.py to install necessary modules. You may need to add python to PATH.
-After that, open Bot.py and follow the instructions prompted by the bot.
-To run the GUI (Graphical User Interface) version of the bot, open GUI.pyw.
+After that, open Bot.pyw and follow the instructions prompted by the bot.
+To run the CLI (Command Line Interface) version of the bot, open Bot-CLI.py.
 You are required to click "Enter" after entering the values for each textbox.
 
 Use "killprocess.bat" if you have any errors with chrome drivers. THIS WILL CLOSE ALL CHROMEDRIVER INSTANCES!
