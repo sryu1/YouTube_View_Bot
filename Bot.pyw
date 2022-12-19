@@ -5,6 +5,8 @@ import tkinter
 import customtkinter
 import json
 import threading
+import requests
+import webbrowser as wb
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 import chromedriver_autoinstaller
@@ -50,6 +52,33 @@ def main():
     def views_update(self):
         view_value = str(int(view_slider.get()))
         view_label.configure(text=f"{view_value} Views")
+
+        # Updates
+
+    def update():
+        def open_updates():
+            wb.open(f"https://github.com/sryu1/YouTube_View_Bot/releases/tag/{latest_version}")
+
+        def destroy_update_window():
+            update_window.destroy()
+
+        ghrapi = requests.get("https://api.github.com/repos/sryu1/YouTube_View_Bot/releases/latest")
+        current_version = "1.2.3"
+        latest_version = str(ghrapi.json()["name"])
+        if current_version < latest_version:
+            update_window = customtkinter.CTkToplevel()
+            update_window.geometry("300x120")
+            update_window.title("Update")
+
+            # create label on CTkToplevel window
+            update_label = customtkinter.CTkLabel(update_window,
+                                                  text=f"A new update ({latest_version}) has been released!")
+            update_close_button = customtkinter.CTkButton(master=update_window, command=destroy_update_window,
+                                                          text="Close")
+            update_button = customtkinter.CTkButton(master=update_window, command=open_updates, text="Update")
+            update_label.pack(side="top", fill="both", expand=True, padx=20, pady=20)
+            update_button.pack()
+            update_close_button.pack()
 
     def start_bot():
         write_settings()
@@ -152,11 +181,13 @@ def main():
     link_box.pack(pady=10, padx=10)
 
     # Start Button
-    button_1 = customtkinter.CTkButton(master=border, command=threading.Thread(
+    start_button = customtkinter.CTkButton(master=border, command=threading.Thread(
         target=start_bot).start, text="Start Bot")
-    button_1.pack(pady=10, padx=10)
+    start_button.pack(pady=10, padx=10)
 
     progress.pack(pady=10, padx=10)
+
+    update()
 
     app.mainloop()
 
