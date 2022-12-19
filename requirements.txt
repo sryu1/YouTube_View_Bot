@@ -2,3 +2,4 @@
 selenium
 customtkinter
 chromedriver-autoinstaller
+requests
