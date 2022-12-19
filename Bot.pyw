@@ -58,6 +58,7 @@ def main():
     def update():
         def open_updates():
             wb.open(f"https://github.com/sryu1/YouTube_View_Bot/releases/tag/{latest_version}")
+            update_window.destroy()
 
         def destroy_update_window():
             update_window.destroy()
