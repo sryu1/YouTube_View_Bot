@@ -1,7 +1,4 @@
 # YouTube View Bot
-
-## A YouTube bot coded in python
-
 [GitHub Repository](https://www.github.com/sryu1/YouTube_View_Bot)
 
 This bot is created for educational purposes, for people to download and play around and experiment with the codes.
