@@ -2,6 +2,7 @@ import time
 import os
 import random
 import json
+import requests
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 import chromedriver_autoinstaller
@@ -65,8 +66,19 @@ def main():
                 with open("config.json", "w") as jsonfile:
                     jsonfile.write(json_file)
 
-    config()
+    def update():
+        ghrapi = requests.get("https://api.github.com/repos/sryu1/YouTube_View_Bot/releases/latest")
+        current_version = "1.2.3"
+        latest_version = str(ghrapi.json()["name"])
+        if current_version < latest_version:
+            print(
+                f"A new update ({latest_version}) has been released!\n"
+                f"Get the release at https://github.com/sryu1/YouTube_View_Bot/releases/tag/{latest_version}\n"
+                f"Check the changelogs to see if there are any updates to the CLI, "
+                f"updates will most likely be for the GUI")
 
+    update()
+    config()
     chromedriver_autoinstaller.install()
     viewcount = 0
     views = input("how many views would you like: ")
