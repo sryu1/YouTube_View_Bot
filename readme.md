@@ -1,4 +1,7 @@
 # YouTube View Bot
+
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 [GitHub Repository](https://www.github.com/sryu1/YouTube_View_Bot)
 
 This bot is created for educational purposes, for people to download and play around and experiment with the codes.

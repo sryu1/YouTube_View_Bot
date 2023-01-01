@@ -20,11 +20,8 @@ def main():
     app.title("YouTube View Bot")
     app.iconbitmap("Icon.ico")
 
-    if not os.path.isfile('config.json'):
-        configs = {
-            "Headless": 0,
-            "Mute": 0
-        }
+    if not os.path.isfile("config.json"):
+        configs = {"Headless": 0, "Mute": 0}
         json_file = json.dumps(configs)
         with open("config.json", "w") as jsonfile:
             jsonfile.write(json_file)
@@ -34,10 +31,7 @@ def main():
         jsonfile.close()
 
     def write_settings():
-        configs = {
-            "Headless": headless.get(),
-            "Mute": mute.get()
-        }
+        configs = {"Headless": headless.get(), "Mute": mute.get()}
         json_file = json.dumps(configs)
         with open("config.json", "w") as jsonfile:
             jsonfile.write(json_file)
@@ -57,13 +51,17 @@ def main():
 
     def update():
         def open_updates():
-            wb.open(f"https://github.com/sryu1/YouTube_View_Bot/releases/tag/{latest_version}")
+            wb.open(
+                f"https://github.com/sryu1/YouTube_View_Bot/releases/tag/{latest_version}"
+            )
             update_window.destroy()
 
         def destroy_update_window():
             update_window.destroy()
 
-        ghrapi = requests.get("https://api.github.com/repos/sryu1/YouTube_View_Bot/releases/latest")
+        ghrapi = requests.get(
+            "https://api.github.com/repos/sryu1/YouTube_View_Bot/releases/latest"
+        )
         current_version = "1.2.3"
         latest_version = str(ghrapi.json()["name"])
         if current_version < latest_version:
@@ -72,11 +70,16 @@ def main():
             update_window.title("Update")
 
             # create label on CTkToplevel window
-            update_label = customtkinter.CTkLabel(update_window,
-                                                  text=f"A new update ({latest_version}) has been released!")
-            update_close_button = customtkinter.CTkButton(master=update_window, command=destroy_update_window,
-                                                          text="Close")
-            update_button = customtkinter.CTkButton(master=update_window, command=open_updates, text="Update")
+            update_label = customtkinter.CTkLabel(
+                update_window,
+                text=f"A new update ({latest_version}) has been released!",
+            )
+            update_close_button = customtkinter.CTkButton(
+                master=update_window, command=destroy_update_window, text="Close"
+            )
+            update_button = customtkinter.CTkButton(
+                master=update_window, command=open_updates, text="Update"
+            )
             update_label.pack(side="top", fill="both", expand=True, padx=20, pady=20)
             update_button.pack()
             update_close_button.pack()
@@ -86,28 +89,32 @@ def main():
         chromedriver_autoinstaller.install()
         viewcount = 0
         drivers = []
-        sites = ['https://search.yahoo.com/', 'https://duckduckgo.com/', 'https://www.google.com/',
-                 'https://www.bing.com/', 'https://t.co/', 'https://youtube.com']
+        sites = [
+            "https://search.yahoo.com/",
+            "https://duckduckgo.com/",
+            "https://www.google.com/",
+            "https://www.bing.com/",
+            "https://t.co/",
+            "https://youtube.com",
+        ]
         views = int(view_slider.get())
         number_of_drivers = int(tab_box.get())
         time_to_refresh = int(watchtime_box.get())
         url = link_box.get()
-        wsviews = open("Bot Status/views.txt", 'w')
-        wsurl = open("Bot Status/url.txt", 'w')
+        wsviews = open("Bot Status/views.txt", "w")
+        wsurl = open("Bot Status/url.txt", "w")
         wsviews.write(str(views))
         wsviews.close()
         wsurl.write(url)
         wsurl.close()
 
         def wsviewcount():
-            wsvc = open("Bot Status/viewcount.txt", 'w')
+            wsvc = open("Bot Status/viewcount.txt", "w")
             wsvc.write(str(viewcount))
             wsvc.close()
 
         def play_video(drivers):
-            ActionChains(drivers[i]) \
-                .send_keys("k") \
-                .perform()
+            ActionChains(drivers[i]).send_keys("k").perform()
 
         for i in range(number_of_drivers):
             options = webdriver.ChromeOptions()
@@ -115,10 +122,10 @@ def main():
                 options.add_argument("--headless")
             if json_options["Mute"] == 1:
                 options.add_argument("--mute-audio")
-            options.add_experimental_option(
-                "excludeSwitches", ["enable-logging"])
-            drivers.append(webdriver.Chrome(options=options,
-                                            executable_path=r"chromedriver"))
+            options.add_experimental_option("excludeSwitches", ["enable-logging"])
+            drivers.append(
+                webdriver.Chrome(options=options, executable_path=r"chromedriver")
+            )
             drivers[i].get(random.choice(sites))
             drivers[i].get(url)
             play_video(drivers)
@@ -160,30 +167,37 @@ def main():
     # Number of views
     view_value = 20
     view_label = customtkinter.CTkLabel(
-        master=border, justify=tkinter.LEFT, text=f"{view_value} Views")
-    view_slider = customtkinter.CTkSlider(master=border, from_=1, to=50, command=views_update)
+        master=border, justify=tkinter.LEFT, text=f"{view_value} Views"
+    )
+    view_slider = customtkinter.CTkSlider(
+        master=border, from_=1, to=50, command=views_update
+    )
     view_label.pack(pady=10, padx=10)
     view_slider.pack(pady=10, padx=10)
     view_slider.set(20)
 
     # Number of tabs
     tab_box = customtkinter.CTkEntry(
-        master=border, width=200, placeholder_text="Number of tabs")
+        master=border, width=200, placeholder_text="Number of tabs"
+    )
     tab_box.pack(pady=10, padx=10)
 
     # Watch time
     watchtime_box = customtkinter.CTkEntry(
-        master=border, width=200, placeholder_text="Watch time (seconds)")
+        master=border, width=200, placeholder_text="Watch time (seconds)"
+    )
     watchtime_box.pack(pady=10, padx=10)
 
     # Link
-    link_box = customtkinter.CTkEntry(
-        master=border, width=400, placeholder_text="Link")
+    link_box = customtkinter.CTkEntry(master=border, width=400, placeholder_text="Link")
     link_box.pack(pady=10, padx=10)
 
     # Start Button
-    start_button = customtkinter.CTkButton(master=border, command=threading.Thread(
-        target=start_bot).start, text="Start Bot")
+    start_button = customtkinter.CTkButton(
+        master=border,
+        command=threading.Thread(target=start_bot).start,
+        text="Start Bot",
+    )
     start_button.pack(pady=10, padx=10)
 
     progress.pack(pady=10, padx=10)

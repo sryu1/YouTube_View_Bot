@@ -10,15 +10,15 @@ import chromedriver_autoinstaller
 
 def main():
     def config():
-        if not os.path.isfile('config.json'):
+        if not os.path.isfile("config.json"):
+
             def hdls(headless):
                 if headless == "y":
                     return True
                 if headless == "n":
                     return False
 
-            headless = input(
-                "Would you like to run the bot in headless mode? (y/n): ")
+            headless = input("Would you like to run the bot in headless mode? (y/n): ")
 
             def sdop(mute):
                 if mute == "y":
@@ -27,20 +27,20 @@ def main():
                     return False
 
             sound = input(
-                "Would you like to mute the videos while they are playing? (y/n): ")
-            configs = {
-                "Headless": str(hdls(headless)),
-                "Mute": str(sdop(sound))
-            }
+                "Would you like to mute the videos while they are playing? (y/n): "
+            )
+            configs = {"Headless": str(hdls(headless)), "Mute": str(sdop(sound))}
             json_file = json.dumps(configs)
             with open("config.json", "w") as jsonfile:
                 jsonfile.write(json_file)
         else:
             config_options = input(
-                "Would you like to use the previous settings for Headless mode and Sound? (y/n): ")
+                "Would you like to use the previous settings for Headless mode and Sound? (y/n): "
+            )
             if config_options == "y":
                 pass
             else:
+
                 def hdls(headless):
                     if headless == "y":
                         return 1
@@ -48,7 +48,8 @@ def main():
                         return 0
 
                 headless = input(
-                    "Would you like to run the bot in headless mode? (y/n): ")
+                    "Would you like to run the bot in headless mode? (y/n): "
+                )
 
                 def sdop(mute):
                     if mute == "y":
@@ -57,17 +58,17 @@ def main():
                         return 0
 
                 sound = input(
-                    "Would you like to mute the videos while they are playing? (y/n): ")
-                configs = {
-                    "Headless": str(hdls(headless)),
-                    "Mute": str(sdop(sound))
-                }
+                    "Would you like to mute the videos while they are playing? (y/n): "
+                )
+                configs = {"Headless": str(hdls(headless)), "Mute": str(sdop(sound))}
                 json_file = json.dumps(configs)
                 with open("config.json", "w") as jsonfile:
                     jsonfile.write(json_file)
 
     def update():
-        ghrapi = requests.get("https://api.github.com/repos/sryu1/YouTube_View_Bot/releases/latest")
+        ghrapi = requests.get(
+            "https://api.github.com/repos/sryu1/YouTube_View_Bot/releases/latest"
+        )
         current_version = "1.2.3"
         latest_version = str(ghrapi.json()["name"])
         if current_version < latest_version:
@@ -75,7 +76,8 @@ def main():
                 f"A new update ({latest_version}) has been released!\n"
                 f"Get the release at https://github.com/sryu1/YouTube_View_Bot/releases/tag/{latest_version}\n"
                 f"Check the changelogs to see if there are any updates to the CLI, "
-                f"updates will most likely be for the GUI")
+                f"updates will most likely be for the GUI"
+            )
 
     update()
     config()
@@ -86,11 +88,17 @@ def main():
     time_to_refresh = int(input("Choose your watch time (seconds): "))
     url = input("Enter Video URL: ")
     drivers = []
-    sites = ['https://search.yahoo.com/', 'https://duckduckgo.com/', 'https://www.google.com/',
-             'https://www.bing.com/', 'https://t.co/', 'https://youtube.com']
+    sites = [
+        "https://search.yahoo.com/",
+        "https://duckduckgo.com/",
+        "https://www.google.com/",
+        "https://www.bing.com/",
+        "https://t.co/",
+        "https://youtube.com",
+    ]
 
-    wsviews = open("Bot Status/views.txt", 'w')
-    wsurl = open("Bot Status/url.txt", 'w')
+    wsviews = open("Bot Status/views.txt", "w")
+    wsurl = open("Bot Status/url.txt", "w")
     wsviews.write(views)
     wsviews.close()
     wsurl.write(url)
@@ -101,14 +109,12 @@ def main():
         jsonfile.close()
 
     def wsviewcount():
-        wsvc = open("Bot Status/viewcount.txt", 'w')
+        wsvc = open("Bot Status/viewcount.txt", "w")
         wsvc.write(str(viewcount))
         wsvc.close()
 
     def play_video(drivers):
-        ActionChains(drivers[i]) \
-            .send_keys("k") \
-            .perform()
+        ActionChains(drivers[i]).send_keys("k").perform()
 
     for i in range(number_of_drivers):
         options = webdriver.ChromeOptions()
@@ -119,8 +125,9 @@ def main():
         else:
             options.add_argument("--mute-audio")
         options.add_experimental_option("excludeSwitches", ["enable-logging"])
-        drivers.append(webdriver.Chrome(options=options,
-                                        executable_path=r"chromedriver"))
+        drivers.append(
+            webdriver.Chrome(options=options, executable_path=r"chromedriver")
+        )
         drivers[i].get(random.choice(sites))
         drivers[i].get(url)
         play_video(drivers)
