@@ -3,3 +3,4 @@ selenium
 customtkinter
 chromedriver-autoinstaller
 requests
+git+https://github.com/sryu1/pysettings

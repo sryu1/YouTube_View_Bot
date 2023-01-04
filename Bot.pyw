@@ -6,6 +6,7 @@ import customtkinter
 import json
 import threading
 import requests
+import pysettings
 import webbrowser as wb
 from selenium import webdriver
 from selenium.webdriver import ActionChains
@@ -19,22 +20,20 @@ def main():
     app.geometry("800x600")
     app.title("YouTube View Bot")
     app.iconbitmap("Icon.ico")
+    config_file = "config.json"
 
-    if not os.path.isfile("config.json"):
-        configs = {"Headless": 0, "Mute": 0}
-        json_file = json.dumps(configs)
-        with open("config.json", "w") as jsonfile:
-            jsonfile.write(json_file)
+    if not pysettings.config_file_exists(config_file):
+        configs = {"Stream": 0, "Headless": 0, "Mute": 0}
+        pysettings.save(config_file, **configs)
 
-    with open("config.json", "r") as jsonfile:
-        json_options = json.load(jsonfile)
-        jsonfile.close()
+    json_options = pysettings.load(config_file)
 
     def write_settings():
         configs = {"Headless": headless.get(), "Mute": mute.get()}
         json_file = json.dumps(configs)
         with open("config.json", "w") as jsonfile:
             jsonfile.write(json_file)
+        #pysettings.save(config_file, )
 
     def progress_bar():
         viewcount = open("Bot Status/viewcount.txt", "r")

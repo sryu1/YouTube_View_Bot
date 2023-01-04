@@ -3,6 +3,7 @@ import os
 import random
 import json
 import requests
+import pysettings
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 import chromedriver_autoinstaller
