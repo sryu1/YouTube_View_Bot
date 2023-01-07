@@ -9,7 +9,8 @@ import chromedriver_autoinstaller
 
 
 def main():
-    config_file = "config.json"
+    config_file = "cli_config.json"
+
     def config():
         if not pysm.config_file_exists(config_file):
 
@@ -18,6 +19,8 @@ def main():
                     return True
                 if headless == "n":
                     return False
+                else:
+                    print("Only y or n is allowed")
 
             headless = input("Would you like to run the bot in headless mode? (y/n): ")
 
@@ -26,11 +29,24 @@ def main():
                     return True
                 if mute == "n":
                     return False
+                else:
+                    print("Only y or n is allowed")
 
             sound = input(
                 "Would you like to mute the videos while they are playing? (y/n): "
             )
-            configs = {"Headless": str(hdls(headless)), "Mute": str(sdop(sound))}
+
+            def strm(stream):
+                if stream == "y":
+                    return True
+                if stream == "n":
+                    return False
+                else:
+                    print("Only y or n is allowed")
+
+            stream_mode = input("Would you like to enable stream mode for watching streams? (y/n): ")
+
+            configs = {"Headless": str(hdls(headless)), "Mute": str(sdop(sound)), "Stream": str(strm(stream_mode))}
             pysm.save(config_file, **configs)
         else:
             config_options = input(
@@ -42,24 +58,37 @@ def main():
 
                 def hdls(headless):
                     if headless == "y":
-                        return 1
+                        return True
                     if headless == "n":
-                        return 0
+                        return False
+                    else:
+                        print("Only y or n is allowed")
 
-                headless = input(
-                    "Would you like to run the bot in headless mode? (y/n): "
-                )
+                headless = input("Would you like to run the bot in headless mode? (y/n): ")
 
                 def sdop(mute):
                     if mute == "y":
-                        return 1
+                        return True
                     if mute == "n":
-                        return 0
+                        return False
+                    else:
+                        print("Only y or n is allowed")
 
                 sound = input(
                     "Would you like to mute the videos while they are playing? (y/n): "
                 )
-                configs = {"Headless": str(hdls(headless)), "Mute": str(sdop(sound))}
+
+                def strm(stream):
+                    if stream == "y":
+                        return True
+                    if stream == "n":
+                        return False
+                    else:
+                        print("Only y or n is allowed")
+
+                stream_mode = input("Would you like to enable stream mode for watching streams? (y/n): ")
+
+                configs = {"Headless": str(hdls(headless)), "Mute": str(sdop(sound)), "Stream": str(strm(stream_mode))}
                 pysm.save(config_file, **configs)
 
     def update():
