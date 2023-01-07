@@ -1,12 +1,10 @@
 import time
-import os
 import random
 import tkinter
 import customtkinter
-import json
 import threading
 import requests
-import pysettings
+import pysettings_manager as pysm
 import webbrowser as wb
 from selenium import webdriver
 from selenium.webdriver import ActionChains
@@ -22,18 +20,15 @@ def main():
     app.iconbitmap("Icon.ico")
     config_file = "config.json"
 
-    if not pysettings.config_file_exists(config_file):
-        configs = {"Stream": 0, "Headless": 0, "Mute": 0}
-        pysettings.save(config_file, **configs)
+    if not pysm.config_file_exists(config_file):
+        configs = {"Headless": 0, "Mute": 0}
+        pysm.save(config_file, **configs)
 
-    json_options = pysettings.load(config_file)
+    json_options = pysm.load(config_file)
 
     def write_settings():
         configs = {"Headless": headless.get(), "Mute": mute.get()}
-        json_file = json.dumps(configs)
-        with open("config.json", "w") as jsonfile:
-            jsonfile.write(json_file)
-        #pysettings.save(config_file, )
+        pysm.save(config_file, **configs)
 
     def progress_bar():
         viewcount = open("Bot Status/viewcount.txt", "r")

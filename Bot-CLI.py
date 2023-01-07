@@ -1,17 +1,17 @@
 import time
 import os
 import random
-import json
 import requests
-import pysettings
+import pysettings_manager as pysm
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 import chromedriver_autoinstaller
 
 
 def main():
+    config_file = "config.json"
     def config():
-        if not os.path.isfile("config.json"):
+        if not pysm.config_file_exists(config_file):
 
             def hdls(headless):
                 if headless == "y":
@@ -31,9 +31,7 @@ def main():
                 "Would you like to mute the videos while they are playing? (y/n): "
             )
             configs = {"Headless": str(hdls(headless)), "Mute": str(sdop(sound))}
-            json_file = json.dumps(configs)
-            with open("config.json", "w") as jsonfile:
-                jsonfile.write(json_file)
+            pysm.save(config_file, **configs)
         else:
             config_options = input(
                 "Would you like to use the previous settings for Headless mode and Sound? (y/n): "
@@ -62,9 +60,7 @@ def main():
                     "Would you like to mute the videos while they are playing? (y/n): "
                 )
                 configs = {"Headless": str(hdls(headless)), "Mute": str(sdop(sound))}
-                json_file = json.dumps(configs)
-                with open("config.json", "w") as jsonfile:
-                    jsonfile.write(json_file)
+                pysm.save(config_file, **configs)
 
     def update():
         ghrapi = requests.get(
@@ -104,10 +100,7 @@ def main():
     wsviews.close()
     wsurl.write(url)
     wsurl.close()
-
-    with open("config.json", "r") as jsonfile:
-        json_options = json.load(jsonfile)
-        jsonfile.close()
+    json_options = pysm.load(config_file)
 
     def wsviewcount():
         wsvc = open("Bot Status/viewcount.txt", "w")
