@@ -44,9 +44,15 @@ def main():
                 else:
                     print("Only y or n is allowed")
 
-            stream_mode = input("Would you like to enable stream mode for watching streams? (y/n): ")
+            stream_mode = input(
+                "Would you like to enable stream mode for watching streams? (y/n): "
+            )
 
-            configs = {"Headless": str(hdls(headless)), "Mute": str(sdop(sound)), "Stream": str(strm(stream_mode))}
+            configs = {
+                "Headless": str(hdls(headless)),
+                "Mute": str(sdop(sound)),
+                "Stream": str(strm(stream_mode)),
+            }
             pysm.save(config_file, **configs)
         else:
             config_options = input(
@@ -64,7 +70,9 @@ def main():
                     else:
                         print("Only y or n is allowed")
 
-                headless = input("Would you like to run the bot in headless mode? (y/n): ")
+                headless = input(
+                    "Would you like to run the bot in headless mode? (y/n): "
+                )
 
                 def sdop(mute):
                     if mute == "y":
@@ -86,9 +94,15 @@ def main():
                     else:
                         print("Only y or n is allowed")
 
-                stream_mode = input("Would you like to enable stream mode for watching streams? (y/n): ")
+                stream_mode = input(
+                    "Would you like to enable stream mode for watching streams? (y/n): "
+                )
 
-                configs = {"Headless": str(hdls(headless)), "Mute": str(sdop(sound)), "Stream": str(strm(stream_mode))}
+                configs = {
+                    "Headless": str(hdls(headless)),
+                    "Mute": str(sdop(sound)),
+                    "Stream": str(strm(stream_mode)),
+                }
                 pysm.save(config_file, **configs)
 
     def update():
