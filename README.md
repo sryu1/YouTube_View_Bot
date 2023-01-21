@@ -4,9 +4,7 @@
 
 [GitHub Repository](https://www.github.com/sryu1/YouTube_View_Bot)
 
-This bot is created for educational purposes, for people to download and play around and experiment with the codes.
-
-WARNING! USE THIS BOT IN YOUR OWN RISK, I CANNOT DO ANYTHING IF YOU GET BANNED BY YOUTUBE OR ANYTHING SIMILAR. THE BOT
+> ️⚠️ **WARNING!** USE THIS BOT IN YOUR OWN RISK, I CANNOT DO ANYTHING IF YOU GET BANNED BY YOUTUBE OR ANYTHING SIMILAR. THE BOT
 WILL ONLY WORK WITH ONLY ONE IP ADDRESS, YOUR LOCAL IP ADDRESS.
 
 To run the bot, First, open setup.py to install necessary modules. You may need to add python to PATH.
