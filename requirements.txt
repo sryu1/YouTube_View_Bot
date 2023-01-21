@@ -3,3 +3,4 @@ selenium
 customtkinter
 chromedriver-autoinstaller
 requests
+pysettings-manager

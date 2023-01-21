@@ -1,6 +1,4 @@
-import time
 import random
-import tkinter
 import customtkinter
 import threading
 import requests
@@ -16,9 +14,9 @@ def main():
     customtkinter.set_default_color_theme("blue")
     app = customtkinter.CTk()
     app.geometry("800x600")
-    app.title("YouTube View Bot")
+    app.title("YouTube Stream View Bot")
     app.iconbitmap("Icon.ico")
-    config_file = "config.json"
+    config_file = "stream_config.json"
 
     if not pysm.config_file_exists(config_file):
         configs = {"Headless": 0, "Mute": 0}
@@ -29,17 +27,6 @@ def main():
     def write_settings():
         configs = {"Headless": headless.get(), "Mute": mute.get()}
         pysm.save(config_file, **configs)
-
-    def progress_bar():
-        viewcount = open("Bot Status/viewcount.txt", "r")
-        wsviewcount = int(viewcount.read())
-        viewcount.close()
-        views = int(view_slider.get())
-        progress.set(wsviewcount / views)
-
-    def views_update(self):
-        view_value = str(int(view_slider.get()))
-        view_label.configure(text=f"{view_value} Views")
 
         # Updates
 
@@ -81,7 +68,6 @@ def main():
     def start_bot():
         write_settings()
         chromedriver_autoinstaller.install()
-        viewcount = 0
         drivers = []
         sites = [
             "https://search.yahoo.com/",
@@ -91,24 +77,21 @@ def main():
             "https://t.co/",
             "https://youtube.com",
         ]
-        views = int(view_slider.get())
         number_of_drivers = int(tab_box.get())
-        time_to_refresh = int(watchtime_box.get())
         url = link_box.get()
-        wsviews = open("Bot Status/views.txt", "w")
         wsurl = open("Bot Status/url.txt", "w")
-        wsviews.write(str(views))
-        wsviews.close()
         wsurl.write(url)
-        wsurl.close()
+        def stop_bot():
+            drivers[i].quit()
+            app.destroy()
 
-        def wsviewcount():
-            wsvc = open("Bot Status/viewcount.txt", "w")
-            wsvc.write(str(viewcount))
-            wsvc.close()
+        # Stop Button
+        stop_button = customtkinter.CTkButton(master=border, command=stop_bot, text="Stop Bot")
+        stop_button.pack(pady=10, padx=10)
 
         def play_video(drivers):
             ActionChains(drivers[i]).send_keys("k").perform()
+
 
         for i in range(number_of_drivers):
             options = webdriver.ChromeOptions()
@@ -124,17 +107,6 @@ def main():
             drivers[i].get(url)
             play_video(drivers)
 
-        while True:
-            time.sleep(time_to_refresh)
-            viewcount += number_of_drivers
-            wsviewcount()
-            progress_bar()
-
-            if int(views) <= int(viewcount):
-                drivers[i].quit()
-            elif int(views) > int(viewcount):
-                for i in range(number_of_drivers):
-                    drivers[i].refresh()
 
     # Border
     border = customtkinter.CTkFrame(master=app)
@@ -154,33 +126,12 @@ def main():
         mute.select()
     else:
         mute.deselect()
-    # Bot Progress
-    progress = customtkinter.CTkProgressBar(master=border)
-    progress.set(0.0)
 
-    # Number of views
-    view_value = 20
-    view_label = customtkinter.CTkLabel(
-        master=border, justify=tkinter.LEFT, text=f"{view_value} Views"
-    )
-    view_slider = customtkinter.CTkSlider(
-        master=border, from_=1, to=50, command=views_update
-    )
-    view_label.pack(pady=10, padx=10)
-    view_slider.pack(pady=10, padx=10)
-    view_slider.set(20)
-
-    # Number of tabs
+    # Number of bots
     tab_box = customtkinter.CTkEntry(
-        master=border, width=200, placeholder_text="Number of tabs"
+        master=border, width=200, placeholder_text="Number of bots to watch"
     )
     tab_box.pack(pady=10, padx=10)
-
-    # Watch time
-    watchtime_box = customtkinter.CTkEntry(
-        master=border, width=200, placeholder_text="Watch time (seconds)"
-    )
-    watchtime_box.pack(pady=10, padx=10)
 
     # Link
     link_box = customtkinter.CTkEntry(master=border, width=400, placeholder_text="Link")
@@ -194,7 +145,7 @@ def main():
     )
     start_button.pack(pady=10, padx=10)
 
-    progress.pack(pady=10, padx=10)
+
 
     update()
 
