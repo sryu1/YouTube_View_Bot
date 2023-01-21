@@ -1,10 +1,10 @@
 # YouTube View Bot
 
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue?style=plastic)](https://github.com/sryu1/YouTube_View_Bot)
+[![Latest Release](https://img.shields.io/github/v/release/sryu1/YouTube_View_Bot?style=plastic)](https://github.com/sryu1/YouTube_View_Bot/releases)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=plastic)](https://github.com/psf/black)
 
-[GitHub Repository](https://www.github.com/sryu1/YouTube_View_Bot)
-
-> ️⚠️ **WARNING!** USE THIS BOT IN YOUR OWN RISK, I CANNOT DO ANYTHING IF YOU GET BANNED BY YOUTUBE OR ANYTHING SIMILAR. THE BOT
+> ️⚠️ **WARNING:** USE THIS BOT IN YOUR OWN RISK, I CANNOT DO ANYTHING IF YOU GET BANNED BY YOUTUBE OR ANYTHING SIMILAR. THE BOT
 WILL ONLY WORK WITH ONLY ONE IP ADDRESS, YOUR LOCAL IP ADDRESS.
 
 To run the bot, First, open setup.py to install necessary modules. You may need to add python to PATH.
