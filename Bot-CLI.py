@@ -192,7 +192,6 @@ def main():
             input("Enter the number of bots you would like watching the stream: ")
         )
         url = input("Enter Video URL: ")
-
         wsurl = open("Bot Status/url.txt", "w")
         wsurl.write(url)
         wsurl.close()
