@@ -109,14 +109,12 @@ def main():
         ghrapi = requests.get(
             "https://api.github.com/repos/sryu1/YouTube_View_Bot/releases/latest"
         )
-        current_version = "1.2.3"
+        current_version = "v1.2.4"
         latest_version = str(ghrapi.json()["name"])
         if current_version < latest_version:
             print(
                 f"A new update ({latest_version}) has been released!\n"
-                f"Get the release at https://github.com/sryu1/YouTube_View_Bot/releases/tag/{latest_version}\n"
-                f"Check the changelogs to see if there are any updates to the CLI, "
-                f"updates will most likely be for the GUI"
+                f"Get the release at https://github.com/sryu1/YouTube_View_Bot/releases/tag/{latest_version}"
             )
 
     update()
