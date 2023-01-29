@@ -20,7 +20,7 @@ def main():
                 if headless == "n":
                     return False
                 else:
-                    print("Only y or n is allowed")
+                    raise Exception("Only y or n is allowed")
 
             headless = input("Would you like to run the bot in headless mode? (y/n): ")
 
@@ -30,7 +30,7 @@ def main():
                 if mute == "n":
                     return False
                 else:
-                    print("Only y or n is allowed")
+                    raise Exception("Only y or n is allowed")
 
             sound = input(
                 "Would you like to mute the videos while they are playing? (y/n): "
@@ -42,7 +42,7 @@ def main():
                 if stream == "n":
                     return False
                 else:
-                    print("Only y or n is allowed")
+                    raise Exception("Only y or n is allowed")
 
             stream_mode = input(
                 "Would you like to enable stream mode for watching streams? (y/n): "
@@ -55,12 +55,16 @@ def main():
             }
             pysm.save(config_file, **configs)
         else:
-            config_options = input(
-                "Would you like to use the previous settings for Stream mode, Headless mode and Sound? (y/n): "
-            )
-            if config_options == "y":
-                pass
-            else:
+            try:
+                if pysm.load(config_file)["Headless"] != "None":
+                    if pysm.load(config_file)["Mute"] != "None":
+                        if pysm.load(config_file)["Stream"] != "None":
+                            config_options = input(
+                                "Would you like to use the previous settings for Stream mode, Headless mode and Sound? (y/n): "
+                            )
+            except TypeError:
+                config_options = None
+            if config_options != "y" or config_options is None:
 
                 def hdls(headless):
                     if headless == "y":
@@ -68,7 +72,7 @@ def main():
                     if headless == "n":
                         return False
                     else:
-                        print("Only y or n is allowed")
+                        raise Exception("Only y or n is allowed")
 
                 headless = input(
                     "Would you like to run the bot in headless mode? (y/n): "
@@ -80,7 +84,7 @@ def main():
                     if mute == "n":
                         return False
                     else:
-                        print("Only y or n is allowed")
+                        raise Exception("Only y or n is allowed")
 
                 sound = input(
                     "Would you like to mute the videos while they are playing? (y/n): "
@@ -92,7 +96,7 @@ def main():
                     if stream == "n":
                         return False
                     else:
-                        print("Only y or n is allowed")
+                        raise Exception("Only y or n is allowed")
 
                 stream_mode = input(
                     "Would you like to enable stream mode for watching streams? (y/n): "
@@ -157,9 +161,9 @@ def main():
 
         for i in range(number_of_drivers):
             options = webdriver.ChromeOptions()
-            if json_options["Headless"] == 1:
+            if json_options["Headless"] == "True":
                 options.add_argument("--headless")
-            if json_options["Mute"] == 0:
+            if json_options["Mute"] == "False":
                 pass
             else:
                 options.add_argument("--mute-audio")
