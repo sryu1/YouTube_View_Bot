@@ -16,9 +16,9 @@ def main():
 
             def hdls(headless):
                 if headless == "y":
-                    return True
+                    return 1
                 if headless == "n":
-                    return False
+                    return 0
                 else:
                     raise Exception("Only y or n is allowed")
 
@@ -26,9 +26,9 @@ def main():
 
             def sdop(mute):
                 if mute == "y":
-                    return True
+                    return 1
                 if mute == "n":
-                    return False
+                    return 0
                 else:
                     raise Exception("Only y or n is allowed")
 
@@ -38,9 +38,9 @@ def main():
 
             def strm(stream):
                 if stream == "y":
-                    return True
+                    return 1
                 if stream == "n":
-                    return False
+                    return 0
                 else:
                     raise Exception("Only y or n is allowed")
 
@@ -68,9 +68,9 @@ def main():
 
                 def hdls(headless):
                     if headless == "y":
-                        return True
+                        return 1
                     if headless == "n":
-                        return False
+                        return 0
                     else:
                         raise Exception("Only y or n is allowed")
 
@@ -80,9 +80,9 @@ def main():
 
                 def sdop(mute):
                     if mute == "y":
-                        return True
+                        return 1
                     if mute == "n":
-                        return False
+                        return 0
                     else:
                         raise Exception("Only y or n is allowed")
 
@@ -92,9 +92,9 @@ def main():
 
                 def strm(stream):
                     if stream == "y":
-                        return True
+                        return 1
                     if stream == "n":
-                        return False
+                        return 0
                     else:
                         raise Exception("Only y or n is allowed")
 
@@ -161,9 +161,9 @@ def main():
 
         for i in range(number_of_drivers):
             options = webdriver.ChromeOptions()
-            if json_options["Headless"] == "True":
+            if json_options["Headless"] == 1:
                 options.add_argument("--headless")
-            if json_options["Mute"] == "False":
+            if json_options["Mute"] == 0:
                 pass
             else:
                 options.add_argument("--mute-audio")
