@@ -17,7 +17,7 @@ def main():
     app = customtkinter.CTk()
     app.geometry("800x600")
     app.title("YouTube View Bot")
-    app.iconbitmap("Icon.ico")
+    app.after(201, lambda: app.iconbitmap("Icon.ico"))
     config_file = "config.json"
 
     if not pysm.config_file_exists(config_file):

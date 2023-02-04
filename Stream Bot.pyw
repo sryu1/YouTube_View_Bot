@@ -15,7 +15,7 @@ def main():
     app = customtkinter.CTk()
     app.geometry("800x600")
     app.title("YouTube Stream View Bot")
-    app.iconbitmap("Icon.ico")
+    app.after(201, lambda: app.iconbitmap("Icon.ico"))
     config_file = "stream_config.json"
 
     if not pysm.config_file_exists(config_file):
@@ -81,6 +81,7 @@ def main():
         url = link_box.get()
         wsurl = open("Bot Status/url.txt", "w")
         wsurl.write(url)
+
         def stop_bot():
             drivers[i].quit()
             app.destroy()
@@ -91,7 +92,6 @@ def main():
 
         def play_video(drivers):
             ActionChains(drivers[i]).send_keys("k").perform()
-
 
         for i in range(number_of_drivers):
             options = webdriver.ChromeOptions()
@@ -106,7 +106,6 @@ def main():
             drivers[i].get(random.choice(sites))
             drivers[i].get(url)
             play_video(drivers)
-
 
     # Border
     border = customtkinter.CTkFrame(master=app)
@@ -144,8 +143,6 @@ def main():
         text="Start Bot",
     )
     start_button.pack(pady=10, padx=10)
-
-
 
     update()
 
