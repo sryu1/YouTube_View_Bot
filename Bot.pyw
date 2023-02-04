@@ -19,15 +19,49 @@ def main():
     app.geometry("800x600")
     app.title("YouTube View Bot")
     app.after(201, lambda: app.iconbitmap("Icon.ico"))
+    user = os.getlogin()
     config_file = os.path.join(
         "C:",
         os.sep,
         "Users",
-        os.getlogin(),
+        user,
         "Documents",
         "YouTube View Bot",
         "config.json",
     )
+    ytvb_data = str("C:/" + "Users/" + user + "/" + "Documents/" + "YouTube View Bot/")
+    if (
+        os.path.exists(
+            os.path.join(
+                os.path.join(
+                    "C:",
+                    os.sep,
+                    "Users",
+                    user,
+                    "Documents",
+                    "YouTube View Bot",
+                    "Bot Status",
+                )
+            )
+        )
+        is False
+    ):
+        os.mkdir(ytvb_data + "Bot Status/")
+        wsviews = open(
+            ytvb_data + "Bot Status/" + "views.txt",
+            "w+",
+        )
+        wsurl = open(
+            ytvb_data + "Bot Status/" + "url.txt",
+            "w+",
+        )
+        wsvc = open(
+            ytvb_data + "Bot Status/" + "viewcount.txt",
+            "w+",
+        )
+        wsviews.close()
+        wsurl.close()
+        wsvc.close()
 
     if not pysm.config_file_exists(config_file):
         configs = {"Headless": 0, "Mute": 0}
@@ -40,7 +74,10 @@ def main():
         pysm.save(config_file, **configs)
 
     def progress_bar():
-        viewcount = open("Bot Status/viewcount.txt", "r")
+        viewcount = open(
+            f"C:/Users/{os.getlogin()}/Documents/YouTube View Bot/Bot Status/viewcount.txt",
+            "r",
+        )
         wsviewcount = int(viewcount.read())
         viewcount.close()
         views = int(view_slider.get())
@@ -104,15 +141,15 @@ def main():
         number_of_drivers = int(tab_box.get())
         time_to_refresh = int(watchtime_box.get())
         url = link_box.get()
-        wsviews = open("Bot Status/views.txt", "w")
-        wsurl = open("Bot Status/url.txt", "w")
+        wsviews = open(ytvb_data + "Bot Status/views.txt", "w")
+        wsurl = open(ytvb_data + "Bot Status/url.txt", "w")
         wsviews.write(str(views))
         wsviews.close()
         wsurl.write(url)
         wsurl.close()
 
         def wsviewcount():
-            wsvc = open("Bot Status/viewcount.txt", "w")
+            wsvc = open(ytvb_data + "Bot Status/viewcount.txt", "w")
             wsvc.write(str(viewcount))
             wsvc.close()
 

@@ -9,15 +9,49 @@ import chromedriver_autoinstaller
 
 
 def main():
+    user = os.getlogin()
     config_file = os.path.join(
         "C:",
         os.sep,
         "Users",
-        os.getlogin(),
+        user,
         "Documents",
         "YouTube View Bot",
         "cli_config.json",
     )
+    ytvb_data = str("C:/" + "Users/" + user + "/" + "Documents/" + "YouTube View Bot/")
+    if (
+        os.path.exists(
+            os.path.join(
+                os.path.join(
+                    "C:",
+                    os.sep,
+                    "Users",
+                    user,
+                    "Documents",
+                    "YouTube View Bot",
+                    "Bot Status",
+                )
+            )
+        )
+        is False
+    ):
+        os.mkdir(ytvb_data + "Bot Status/")
+        wsviews = open(
+            ytvb_data + "Bot Status/" + "views.txt",
+            "w+",
+        )
+        wsurl = open(
+            ytvb_data + "Bot Status/" + "url.txt",
+            "w+",
+        )
+        wsvc = open(
+            ytvb_data + "Bot Status/" + "viewcount.txt",
+            "w+",
+        )
+        wsviews.close()
+        wsurl.close()
+        wsvc.close()
 
     def config():
         if not pysm.config_file_exists(config_file):
@@ -146,7 +180,7 @@ def main():
     json_options = pysm.load(config_file)
 
     def wsviewcount():
-        wsvc = open("Bot Status/viewcount.txt", "w")
+        wsvc = open(ytvb_data + "Bot Status/viewcount.txt", "w")
         wsvc.write(str(viewcount))
         wsvc.close()
 
@@ -160,8 +194,8 @@ def main():
         time_to_refresh = int(input("Choose your watch time (seconds): "))
         url = input("Enter Video URL: ")
 
-        wsviews = open("Bot Status/views.txt", "w")
-        wsurl = open("Bot Status/url.txt", "w")
+        wsviews = open(ytvb_data + "Bot Status/views.txt", "w")
+        wsurl = open(ytvb_data + "Bot Status/url.txt", "w")
         wsviews.write(views)
         wsviews.close()
         wsurl.write(url)
@@ -202,7 +236,7 @@ def main():
             input("Enter the number of bots you would like watching the stream: ")
         )
         url = input("Enter Video URL: ")
-        wsurl = open("Bot Status/url.txt", "w")
+        wsurl = open(ytvb_data + "Bot Status/url.txt", "w")
         wsurl.write(url)
         wsurl.close()
 

@@ -17,15 +17,49 @@ def main():
     app.geometry("800x600")
     app.title("YouTube Stream View Bot")
     app.after(201, lambda: app.iconbitmap("Icon.ico"))
+    user = os.getlogin()
     config_file = os.path.join(
         "C:",
         os.sep,
         "Users",
-        os.getlogin(),
+        user,
         "Documents",
         "YouTube View Bot",
         "stream_config.json",
     )
+    ytvb_data = str("C:/" + "Users/" + user + "/" + "Documents/" + "YouTube View Bot/")
+    if (
+        os.path.exists(
+            os.path.join(
+                os.path.join(
+                    "C:",
+                    os.sep,
+                    "Users",
+                    user,
+                    "Documents",
+                    "YouTube View Bot",
+                    "Bot Status",
+                )
+            )
+        )
+        is False
+    ):
+        os.mkdir(ytvb_data + "Bot Status/")
+        wsviews = open(
+            ytvb_data + "Bot Status/" + "views.txt",
+            "w+",
+        )
+        wsurl = open(
+            ytvb_data + "Bot Status/" + "url.txt",
+            "w+",
+        )
+        wsvc = open(
+            ytvb_data + "Bot Status/" + "viewcount.txt",
+            "w+",
+        )
+        wsviews.close()
+        wsurl.close()
+        wsvc.close()
 
     if not pysm.config_file_exists(config_file):
         configs = {"Headless": 0, "Mute": 0}
@@ -88,7 +122,7 @@ def main():
         ]
         number_of_drivers = int(tab_box.get())
         url = link_box.get()
-        wsurl = open("Bot Status/url.txt", "w")
+        wsurl = open(ytvb_data + "Bot Status/url.txt", "w")
         wsurl.write(url)
 
         def stop_bot():
