@@ -18,7 +18,6 @@ def main():
         "YouTube View Bot",
         "cli_config.json",
     )
-    print(config_file)
 
     def config():
         if not pysm.config_file_exists(config_file):
@@ -122,7 +121,7 @@ def main():
         ghrapi = requests.get(
             "https://api.github.com/repos/sryu1/YouTube_View_Bot/releases/latest"
         )
-        current_version = "v1.2.5"
+        current_version = "v1.2.6"
         latest_version = str(ghrapi.json()["name"])
         if current_version < latest_version:
             print(

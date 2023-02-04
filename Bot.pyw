@@ -19,7 +19,15 @@ def main():
     app.geometry("800x600")
     app.title("YouTube View Bot")
     app.after(201, lambda: app.iconbitmap("Icon.ico"))
-    config_file = os.path.join("C:", os.sep, "Users", os.getlogin(), "Documents", "YouTube View Bot", "config.json")
+    config_file = os.path.join(
+        "C:",
+        os.sep,
+        "Users",
+        os.getlogin(),
+        "Documents",
+        "YouTube View Bot",
+        "config.json",
+    )
 
     if not pysm.config_file_exists(config_file):
         configs = {"Headless": 0, "Mute": 0}
@@ -57,7 +65,7 @@ def main():
         ghrapi = requests.get(
             "https://api.github.com/repos/sryu1/YouTube_View_Bot/releases/latest"
         )
-        current_version = "v1.2.5"
+        current_version = "v1.2.6"
         latest_version = str(ghrapi.json()["name"])
         if current_version < latest_version:
             update_window = customtkinter.CTkToplevel()

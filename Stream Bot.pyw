@@ -17,8 +17,15 @@ def main():
     app.geometry("800x600")
     app.title("YouTube Stream View Bot")
     app.after(201, lambda: app.iconbitmap("Icon.ico"))
-    config_file = os.path.join("C:", os.sep, "Users", os.getlogin(), "Documents", "YouTube View Bot", "stream_config.json")
-
+    config_file = os.path.join(
+        "C:",
+        os.sep,
+        "Users",
+        os.getlogin(),
+        "Documents",
+        "YouTube View Bot",
+        "stream_config.json",
+    )
 
     if not pysm.config_file_exists(config_file):
         configs = {"Headless": 0, "Mute": 0}
@@ -45,7 +52,7 @@ def main():
         ghrapi = requests.get(
             "https://api.github.com/repos/sryu1/YouTube_View_Bot/releases/latest"
         )
-        current_version = "v1.2.5"
+        current_version = "v1.2.6"
         latest_version = str(ghrapi.json()["name"])
         if current_version < latest_version:
             update_window = customtkinter.CTkToplevel()
@@ -89,7 +96,9 @@ def main():
             app.destroy()
 
         # Stop Button
-        stop_button = customtkinter.CTkButton(master=border, command=stop_bot, text="Stop Bot")
+        stop_button = customtkinter.CTkButton(
+            master=border, command=stop_bot, text="Stop Bot"
+        )
         stop_button.pack(pady=10, padx=10)
 
         def play_video(drivers):
