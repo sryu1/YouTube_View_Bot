@@ -145,7 +145,7 @@ def main():
     def play_video(drivers):
         ActionChains(drivers[i]).send_keys("k").perform()
 
-    if not json_options["Stream"]:
+    if json_options["Stream"] != 1:
         viewcount = 0
         views = input("how many views would you like: ")
         number_of_drivers = int(input("Enter the number of tabs you want open: "))
