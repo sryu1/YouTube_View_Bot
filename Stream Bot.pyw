@@ -1,3 +1,4 @@
+import os
 import random
 import customtkinter
 import threading
@@ -16,7 +17,8 @@ def main():
     app.geometry("800x600")
     app.title("YouTube Stream View Bot")
     app.after(201, lambda: app.iconbitmap("Icon.ico"))
-    config_file = "stream_config.json"
+    config_file = os.path.join("C:", os.sep, "Users", os.getlogin(), "Documents", "YouTube View Bot", "stream_config.json")
+
 
     if not pysm.config_file_exists(config_file):
         configs = {"Headless": 0, "Mute": 0}

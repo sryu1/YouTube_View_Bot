@@ -9,7 +9,16 @@ import chromedriver_autoinstaller
 
 
 def main():
-    config_file = "cli_config.json"
+    config_file = os.path.join(
+        "C:",
+        os.sep,
+        "Users",
+        os.getlogin(),
+        "Documents",
+        "YouTube View Bot",
+        "cli_config.json",
+    )
+    print(config_file)
 
     def config():
         if not pysm.config_file_exists(config_file):
