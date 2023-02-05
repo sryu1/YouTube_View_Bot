@@ -156,7 +156,7 @@ def main():
         ghrapi = requests.get(
             "https://api.github.com/repos/sryu1/YouTube_View_Bot/releases/latest"
         )
-        current_version = "v1.2.7"
+        current_version = "v1.2.8"
         latest_version = str(ghrapi.json()["name"])
         if current_version < latest_version:
             print(
