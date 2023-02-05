@@ -226,8 +226,7 @@ def main():
             print("view count = " + str(viewcount))
             if int(views) <= int(viewcount):
                 drivers[i].quit()
-                print("the listed amount has been viewed")
-                os.system("pause")
+                input("The listed amount has been viewed \nPress Enter to exit . . .")
                 exit()
             elif int(views) > int(viewcount):
                 for i in range(number_of_drivers):
