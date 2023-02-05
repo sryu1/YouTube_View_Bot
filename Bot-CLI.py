@@ -36,6 +36,7 @@ def main():
         )
         is False
     ):
+        os.mkdir(ytvb_data)
         os.mkdir(ytvb_data + "Bot Status/")
         wsviews = open(
             ytvb_data + "Bot Status/" + "views.txt",
