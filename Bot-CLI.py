@@ -4,6 +4,7 @@ import random
 import requests
 import pysettings_manager as pysm
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver import ActionChains
 import chromedriver_autoinstaller
 
@@ -92,9 +93,9 @@ def main():
             )
 
             configs = {
-                "Headless": str(hdls(headless)),
-                "Mute": str(sdop(sound)),
-                "Stream": str(strm(stream_mode)),
+                "Headless": hdls(headless),
+                "Mute": sdop(sound),
+                "Stream": strm(stream_mode),
             }
             pysm.save(config_file, **configs)
         else:
@@ -146,9 +147,9 @@ def main():
                 )
 
                 configs = {
-                    "Headless": str(hdls(headless)),
-                    "Mute": str(sdop(sound)),
-                    "Stream": str(strm(stream_mode)),
+                    "Headless": hdls(headless),
+                    "Mute": sdop(sound),
+                    "Stream": strm(stream_mode),
                 }
                 pysm.save(config_file, **configs)
 
@@ -186,7 +187,9 @@ def main():
         wsvc.close()
 
     def play_video(drivers):
-        ActionChains(drivers[i]).send_keys("k").perform()
+        ActionChains(
+            drivers[i].find_element(By.CLASS_NAME, "ytp-large-play-button").click()
+        )
 
     if json_options["Stream"] != 1:
         viewcount = 0

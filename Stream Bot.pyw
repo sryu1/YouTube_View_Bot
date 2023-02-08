@@ -6,6 +6,7 @@ import requests
 import pysettings_manager as pysm
 import webbrowser as wb
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver import ActionChains
 import chromedriver_autoinstaller
 
@@ -137,7 +138,9 @@ def main():
         stop_button.pack(pady=10, padx=10)
 
         def play_video(drivers):
-            ActionChains(drivers[i]).send_keys("k").perform()
+            ActionChains(
+                drivers[i].find_element(By.CLASS_NAME, "ytp-large-play-button").click()
+            )
 
         for i in range(number_of_drivers):
             options = webdriver.ChromeOptions()
