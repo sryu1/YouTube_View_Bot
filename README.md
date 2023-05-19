@@ -19,5 +19,4 @@ views and 2 tabs with a watch time of 2 minutes, both videos will refresh when t
 the video is 2:01 long, the first video might change videos, and it will refresh in a different video which you wouldn't
 want happening.
 
-When the bot opens new browser tabs, it will go from a range of different websites to the provided link. This is because
-it can improve the video analytics of traffic history.
+When the bot opens new browser tabs, it will go from a range of different websites to the provided link. This is to enhance the video analytics of traffic history.
