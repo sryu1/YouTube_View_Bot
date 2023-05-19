@@ -1,157 +1,53 @@
 import time
-import os
 import random
 import requests
-import pysettings_manager as pysm
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver import ActionChains
 import chromedriver_autoinstaller
 
 
 def main():
-    user = os.getlogin()
-    config_file = os.path.join(
-        "C:",
-        os.sep,
-        "Users",
-        user,
-        "Documents",
-        "YouTube View Bot",
-        "cli_config.json",
-    )
-    ytvb_data = str("C:/" + "Users/" + user + "/" + "Documents/" + "YouTube View Bot/")
-    if (
-        os.path.exists(
-            os.path.join(
-                os.path.join(
-                    "C:",
-                    os.sep,
-                    "Users",
-                    user,
-                    "Documents",
-                    "YouTube View Bot",
-                    "Bot Status",
-                )
-            )
-        )
-        is False
-    ):
-        os.mkdir(ytvb_data)
-        os.mkdir(ytvb_data + "Bot Status/")
-        wsviews = open(
-            ytvb_data + "Bot Status/" + "views.txt",
-            "w+",
-        )
-        wsurl = open(
-            ytvb_data + "Bot Status/" + "url.txt",
-            "w+",
-        )
-        wsvc = open(
-            ytvb_data + "Bot Status/" + "viewcount.txt",
-            "w+",
-        )
-        wsviews.close()
-        wsurl.close()
-        wsvc.close()
-
     def config():
-        if not pysm.config_file_exists(config_file):
+        def hdls(headless):
+            if headless == "y":
+                return 1
+            if headless == "n":
+                return 0
+            else:
+                raise Exception("Only y or n is allowed")
 
-            def hdls(headless):
-                if headless == "y":
-                    return 1
-                if headless == "n":
-                    return 0
-                else:
-                    raise Exception("Only y or n is allowed")
+        headless = input("Would you like to run the bot in headless mode? (y/n): ")
 
-            headless = input("Would you like to run the bot in headless mode? (y/n): ")
+        def sdop(mute):
+            if mute == "y":
+                return 1
+            if mute == "n":
+                return 0
+            else:
+                raise Exception("Only y or n is allowed")
 
-            def sdop(mute):
-                if mute == "y":
-                    return 1
-                if mute == "n":
-                    return 0
-                else:
-                    raise Exception("Only y or n is allowed")
+        sound = input(
+            "Would you like to mute the videos while they are playing? (y/n): "
+        )
 
-            sound = input(
-                "Would you like to mute the videos while they are playing? (y/n): "
-            )
+        def strm(stream):
+            if stream == "y":
+                return 1
+            if stream == "n":
+                return 0
+            else:
+                raise Exception("Only y or n is allowed")
 
-            def strm(stream):
-                if stream == "y":
-                    return 1
-                if stream == "n":
-                    return 0
-                else:
-                    raise Exception("Only y or n is allowed")
+        stream_mode = input(
+            "Would you like to enable stream mode for watching streams? (y/n): "
+        )
 
-            stream_mode = input(
-                "Would you like to enable stream mode for watching streams? (y/n): "
-            )
-
-            configs = {
-                "Headless": hdls(headless),
-                "Mute": sdop(sound),
-                "Stream": strm(stream_mode),
-            }
-            pysm.save(config_file, **configs)
-        else:
-            try:
-                if pysm.load(config_file)["Headless"] != "None":
-                    if pysm.load(config_file)["Mute"] != "None":
-                        if pysm.load(config_file)["Stream"] != "None":
-                            config_options = input(
-                                "Would you like to use the previous settings for Stream mode, Headless mode and Sound? (y/n): "
-                            )
-            except TypeError:
-                config_options = None
-            if config_options != "y" or config_options is None:
-
-                def hdls(headless):
-                    if headless == "y":
-                        return 1
-                    if headless == "n":
-                        return 0
-                    else:
-                        raise Exception("Only y or n is allowed")
-
-                headless = input(
-                    "Would you like to run the bot in headless mode? (y/n): "
-                )
-
-                def sdop(mute):
-                    if mute == "y":
-                        return 1
-                    if mute == "n":
-                        return 0
-                    else:
-                        raise Exception("Only y or n is allowed")
-
-                sound = input(
-                    "Would you like to mute the videos while they are playing? (y/n): "
-                )
-
-                def strm(stream):
-                    if stream == "y":
-                        return 1
-                    if stream == "n":
-                        return 0
-                    else:
-                        raise Exception("Only y or n is allowed")
-
-                stream_mode = input(
-                    "Would you like to enable stream mode for watching streams? (y/n): "
-                )
-
-                configs = {
-                    "Headless": hdls(headless),
-                    "Mute": sdop(sound),
-                    "Stream": strm(stream_mode),
-                }
-                pysm.save(config_file, **configs)
+        configs = {
+            "Headless": hdls(headless),
+            "Mute": sdop(sound),
+            "Stream": strm(stream_mode),
+        }
+        return configs
 
     def update():
         ghrapi = requests.get(
@@ -166,7 +62,7 @@ def main():
             )
 
     update()
-    config()
+    configs = config()
     chromedriver_autoinstaller.install()
 
     drivers = []
@@ -176,42 +72,30 @@ def main():
         "https://www.google.com/",
         "https://www.bing.com/",
         "https://t.co/",
-        "https://youtube.com",
+        "https://youtube.com/",
+        "https://www.ecosia.org/",
+        "https://www.reddit.com/",
+        "https://www.twitch.tv/",
+        "https://www.instagram.com/",
+        "https://www.tiktok.com/",
+        "https://search.brave.com",
     ]
 
-    json_options = pysm.load(config_file)
-
-    def wsviewcount():
-        wsvc = open(ytvb_data + "Bot Status/viewcount.txt", "w")
-        wsvc.write(str(viewcount))
-        wsvc.close()
-
     def play_video(drivers):
-        ActionChains(
-            drivers[i].find_element(By.CLASS_NAME, "ytp-large-play-button").click()
-        )
+        drivers[i].find_element(By.CLASS_NAME, "ytp-large-play-button").click()
 
-    if json_options["Stream"] != 1:
+    if configs["Stream"] != 1:
         viewcount = 0
         views = input("how many views would you like: ")
         number_of_drivers = int(input("Enter the number of tabs you want open: "))
         time_to_refresh = int(input("Choose your watch time (seconds): "))
         url = input("Enter Video URL: ")
 
-        wsviews = open(ytvb_data + "Bot Status/views.txt", "w")
-        wsurl = open(ytvb_data + "Bot Status/url.txt", "w")
-        wsviews.write(views)
-        wsviews.close()
-        wsurl.write(url)
-        wsurl.close()
-
         for i in range(number_of_drivers):
             options = webdriver.ChromeOptions()
-            if json_options["Headless"] == 1:
+            if configs["Headless"] == 1:
                 options.add_argument("--headless")
-            if json_options["Mute"] == 0:
-                pass
-            else:
+            if configs["Mute"] == 1:
                 options.add_argument("--mute-audio")
             options.add_experimental_option("excludeSwitches", ["enable-logging"])
             drivers.append(
@@ -224,7 +108,6 @@ def main():
         while True:
             time.sleep(time_to_refresh)
             viewcount += number_of_drivers
-            wsviewcount()
 
             print("view count = " + str(viewcount))
             if int(views) <= int(viewcount):
@@ -234,20 +117,17 @@ def main():
             elif int(views) > int(viewcount):
                 for i in range(number_of_drivers):
                     drivers[i].refresh()
-    elif json_options["Stream"]:
+    elif configs["Stream"]:
         number_of_drivers = int(
             input("Enter the number of bots you would like watching the stream: ")
         )
         url = input("Enter Video URL: ")
-        wsurl = open(ytvb_data + "Bot Status/url.txt", "w")
-        wsurl.write(url)
-        wsurl.close()
 
         for i in range(number_of_drivers):
             options = webdriver.ChromeOptions()
-            if json_options["Headless"] == 1:
+            if configs["Headless"] == 1:
                 options.add_argument("--headless")
-            if json_options["Mute"] == 0:
+            if configs["Mute"] == 0:
                 pass
             else:
                 options.add_argument("--mute-audio")

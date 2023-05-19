@@ -1,15 +1,12 @@
-import os
 import time
 import random
 import tkinter
 import customtkinter
 import threading
 import requests
-import pysettings_manager as pysm
 import webbrowser as wb
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver import ActionChains
 import chromedriver_autoinstaller
 
 
@@ -20,70 +17,10 @@ def main():
     app.geometry("800x600")
     app.title("YouTube View Bot")
     app.after(201, lambda: app.iconbitmap("Icon.ico"))
-    user = os.getlogin()
-    config_file = os.path.join(
-        "C:",
-        os.sep,
-        "Users",
-        user,
-        "Documents",
-        "YouTube View Bot",
-        "config.json",
-    )
-    ytvb_data = str("C:/" + "Users/" + user + "/" + "Documents/" + "YouTube View Bot/")
-    if (
-        os.path.exists(
-            os.path.join(
-                os.path.join(
-                    "C:", os.sep, "Users", user, "Documents", "YouTube View Bot"
-                )
-            )
-        )
-        is False
-    ):
-        os.mkdir(ytvb_data)
-        os.mkdir(ytvb_data + "Bot Status")
-        wsviews = open(
-            ytvb_data + "Bot Status/" + "views.txt",
-            "w+",
-        )
-        wsurl = open(
-            ytvb_data + "Bot Status/" + "url.txt",
-            "w+",
-        )
-        wsvc = open(
-            ytvb_data + "Bot Status/" + "viewcount.txt",
-            "w+",
-        )
-        wsviews.close()
-        wsurl.close()
-        wsvc.close()
-
-    if not pysm.config_file_exists(config_file):
-        configs = {"Headless": 0, "Mute": 0}
-        pysm.save(config_file, **configs)
-
-    json_options = pysm.load(config_file)
-
-    def write_settings():
-        configs = {"Headless": headless.get(), "Mute": mute.get()}
-        pysm.save(config_file, **configs)
-
-    def progress_bar():
-        viewcount = open(
-            f"C:/Users/{os.getlogin()}/Documents/YouTube View Bot/Bot Status/viewcount.txt",
-            "r",
-        )
-        wsviewcount = int(viewcount.read())
-        viewcount.close()
-        views = int(view_slider.get())
-        progress.set(wsviewcount / views)
 
     def views_update(self):
         view_value = str(int(view_slider.get()))
         view_label.configure(text=f"{view_value} Views")
-
-        # Updates
 
     def update():
         def open_updates():
@@ -121,7 +58,7 @@ def main():
             update_close_button.pack()
 
     def start_bot():
-        write_settings()
+
         chromedriver_autoinstaller.install()
         viewcount = 0
         drivers = []
@@ -131,28 +68,21 @@ def main():
             "https://www.google.com/",
             "https://www.bing.com/",
             "https://t.co/",
-            "https://youtube.com",
+            "https://youtube.com/",
+            "https://www.ecosia.org/",
+            "https://www.reddit.com/",
+            "https://www.twitch.tv/",
+            "https://www.instagram.com/",
+            "https://www.tiktok.com/",
+            "https://search.brave.com",
         ]
         views = int(view_slider.get())
         number_of_drivers = int(tab_box.get())
         time_to_refresh = int(watchtime_box.get())
         url = link_box.get()
-        wsviews = open(ytvb_data + "Bot Status/views.txt", "w")
-        wsurl = open(ytvb_data + "Bot Status/url.txt", "w")
-        wsviews.write(str(views))
-        wsviews.close()
-        wsurl.write(url)
-        wsurl.close()
-
-        def wsviewcount():
-            wsvc = open(ytvb_data + "Bot Status/viewcount.txt", "w")
-            wsvc.write(str(viewcount))
-            wsvc.close()
 
         def play_video(drivers):
-            ActionChains(
-                drivers[i].find_element(By.CLASS_NAME, "ytp-large-play-button").click()
-            )
+            drivers[i].find_element(By.CLASS_NAME, "ytp-large-play-button").click()
 
         for i in range(number_of_drivers):
             options = webdriver.ChromeOptions()
@@ -171,11 +101,11 @@ def main():
         while True:
             time.sleep(time_to_refresh)
             viewcount += number_of_drivers
-            wsviewcount()
-            progress_bar()
+            progress.set(viewcount / views)
 
             if int(views) <= int(viewcount):
                 drivers[i].quit()
+                exit()
             elif int(views) > int(viewcount):
                 for i in range(number_of_drivers):
                     drivers[i].refresh()
@@ -187,17 +117,9 @@ def main():
     # Checkbox
     headless = customtkinter.CTkCheckBox(master=border, text="Headless Mode")
     headless.pack(pady=10, padx=10)
-    if json_options["Headless"] == 1:
-        headless.select()
-    else:
-        headless.deselect()
 
     mute = customtkinter.CTkCheckBox(master=border, text="Mute")
     mute.pack(pady=10, padx=10)
-    if json_options["Mute"] == 1:
-        mute.select()
-    else:
-        mute.deselect()
     # Bot Progress
     progress = customtkinter.CTkProgressBar(master=border)
     progress.set(0.0)
@@ -241,7 +163,6 @@ def main():
     progress.pack(pady=10, padx=10)
 
     update()
-
     app.mainloop()
 
 
