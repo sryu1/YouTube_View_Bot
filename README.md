@@ -4,13 +4,14 @@
 [![Latest Release](https://img.shields.io/github/v/release/sryu1/YouTube_View_Bot)](https://github.com/sryu1/YouTube_View_Bot/releases)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-black)](https://github.com/psf/black)
 
-> ️⚠️ **WARNING:** USE THIS BOT IN YOUR OWN RISK, IT IS YOUR RESPONSIBILITY IF YOU GET BANNED BY YOUTUBE OR ANYTHING SIMILAR. THE BOT
-WILL ONLY WORK WITH ONLY ONE IP ADDRESS, YOUR LOCAL IP ADDRESS.
+> ️⚠️ **WARNING:** USE THIS BOT IN YOUR OWN RISK, IT IS YOUR RESPONSIBILITY IF YOU GET BANNED BY YOUTUBE OR ANYTHING
+> SIMILAR. THE BOT
+> WILL ONLY WORK WITH ONLY ONE IP ADDRESS, YOUR LOCAL IP ADDRESS.
 
-To run the bot, First, open setup.py to install necessary modules. You may need to add python to PATH.
+To run the bot, First, open setup.py to install necessary modules.
 After that, open Bot.pyw and follow the instructions prompted by the bot.
-To run the CLI (Command Line Interface) version of the bot, open Bot-CLI.py.
-You are required to click "Enter" after entering the values for each textbox.
+To run the CLI (Command Line Interface) version of the bot, open Bot-CLI.py. Please note that after using the GUI bot
+once, you will need to close and open it again to run it again.
 
 Use "killprocess.bat" if you have any errors with chrome drivers. THIS WILL CLOSE ALL CHROMEDRIVER INSTANCES!
 
@@ -19,4 +20,5 @@ views and 2 tabs with a watch time of 2 minutes, both videos will refresh when t
 the video is 2:01 long, the first video might change videos, and it will refresh in a different video which you wouldn't
 want happening.
 
-When the bot opens new browser tabs, it will go from a range of different websites to the provided link. This is to enhance the video analytics of traffic history.
+When the bot opens new browser tabs, it will go from a range of different websites to the provided link. This is to
+enhance the video analytics of traffic history.
