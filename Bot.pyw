@@ -123,9 +123,6 @@ def main():
         time_to_refresh = int(watchtime_box.get())
         url = link_box.get()
 
-        def play_video(drivers):
-            drivers[i].find_element(By.CLASS_NAME, "ytp-large-play-button").click()
-
         for i in range(number_of_drivers):
             options = webdriver.ChromeOptions()
             if headless.get() == 1:
@@ -138,7 +135,7 @@ def main():
             )
             drivers[i].get(random.choice(sites))
             drivers[i].get(url)
-            play_video(drivers)
+            drivers[i].find_element(By.CLASS_NAME, "ytp-large-play-button").click()
 
         while True:
             time.sleep(time_to_refresh)
@@ -154,9 +151,50 @@ def main():
 
     def stream_start():
         stream_switch.pack_forget()
+        chromedriver_autoinstaller.install()
+        drivers = []
+        sites = [
+            "https://search.yahoo.com/",
+            "https://duckduckgo.com/",
+            "https://www.google.com/",
+            "https://www.bing.com/",
+            "https://t.co/",
+            "https://youtube.com/",
+            "https://www.ecosia.org/",
+            "https://www.reddit.com/",
+            "https://www.twitch.tv/",
+            "https://www.instagram.com/",
+            "https://www.tiktok.com/",
+            "https://search.brave.com",
+        ]
+        number_of_bots = int(bots_watching.get())
+        url = stream_link.get()
+        for i in range(number_of_bots):
+            options = webdriver.ChromeOptions()
+            if headless.get() == 1:
+                options.add_argument("--headless")
+            if mute.get() == 1:
+                options.add_argument("--mute-audio")
+            options.add_experimental_option("excludeSwitches", ["enable-logging"])
+            drivers.append(
+                webdriver.Chrome(options=options, executable_path=r"chromedriver")
+            )
+            drivers[i].get(random.choice(sites))
+            drivers[i].get(url)
+            drivers[i].find_element(By.CLASS_NAME, "ytp-large-play-button").click()
 
-    def stop_bot():
-        stream_switch.pack(pady=10, padx=10)
+            def stop():
+                drivers[i].quit()
+                global stopped
+                stopped = True
+
+            stopped = False
+            stop_button = customtkinter.CTkButton(
+                master=border, command=stop, text="Stop Bot"
+            )
+            stop_button.pack(pady=10, padx=10)
+            if stopped:
+                exit()
 
     # Border
     border = customtkinter.CTkFrame(master=app)
@@ -202,13 +240,14 @@ def main():
     link_box.pack(pady=10, padx=10)
 
     # Stream Menu
-    stream_bot_value = 20
+    stream_bot_value = 5
     stream_bot_label = customtkinter.CTkLabel(
         master=border, justify=tkinter.LEFT, text=f"{stream_bot_value} Bots"
     )
     bots_watching = customtkinter.CTkSlider(
         master=border, from_=1, to=50, command=stream_bots_update
     )
+    bots_watching.set(5)
     stream_link = customtkinter.CTkEntry(
         master=border, width=400, placeholder_text="Link"
     )
@@ -223,8 +262,6 @@ def main():
         text="Start Bot",
     )
     start_button.pack(pady=10, padx=10)
-
-
 
     progress.pack(pady=10, padx=10)
 
