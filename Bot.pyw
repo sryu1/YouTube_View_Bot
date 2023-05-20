@@ -18,6 +18,29 @@ def main():
     app.title("YouTube View Bot")
     app.after(201, lambda: app.iconbitmap("Icon.ico"))
 
+    def stream_option():
+        if stream_option.get() == 1:
+            headless.pack_forget()
+            mute.pack_forget()
+            view_label.pack_forget()
+            view_slider.pack_forget()
+            tab_box.pack_forget()
+            watchtime_box.pack_forget()
+            link_box.pack_forget()
+            start_button.pack_forget()
+            progress.pack_forget()
+
+        else:
+            headless.pack(pady=10, padx=10)
+            mute.pack(pady=10, padx=10)
+            view_label.pack(pady=10, padx=10)
+            view_slider.pack(pady=10, padx=10)
+            tab_box.pack(pady=10, padx=10)
+            watchtime_box.pack(pady=10, padx=10)
+            link_box.pack(pady=10, padx=10)
+            start_button.pack(pady=10, padx=10)
+            progress.pack(pady=10, padx=10)
+
     def views_update(self):
         view_value = str(int(view_slider.get()))
         view_label.configure(text=f"{view_value} Views")
@@ -114,12 +137,17 @@ def main():
     border = customtkinter.CTkFrame(master=app)
     border.pack(pady=20, padx=20, fill="both", expand=True)
 
+    # Stream Option
+    stream_option = customtkinter.CTkSwitch(master=border, text="Stream Mode", command=stream_option)
+    stream_option.pack(pady=10, padx=10)
+
     # Checkbox
     headless = customtkinter.CTkCheckBox(master=border, text="Headless Mode")
     headless.pack(pady=10, padx=10)
 
     mute = customtkinter.CTkCheckBox(master=border, text="Mute")
     mute.pack(pady=10, padx=10)
+
     # Bot Progress
     progress = customtkinter.CTkProgressBar(master=border)
     progress.set(0.0)
@@ -151,6 +179,7 @@ def main():
     # Link
     link_box = customtkinter.CTkEntry(master=border, width=400, placeholder_text="Link")
     link_box.pack(pady=10, padx=10)
+
 
     # Start Button
     start_button = customtkinter.CTkButton(
