@@ -19,7 +19,8 @@ def main():
     app.after(201, lambda: app.iconbitmap("Icon.ico"))
 
     def stream_option():
-        if stream_option.get() == 1:
+        if stream_switch.get() == 1:
+            stream_switch.pack_forget()
             headless.pack_forget()
             mute.pack_forget()
             view_label.pack_forget()
@@ -29,8 +30,22 @@ def main():
             link_box.pack_forget()
             start_button.pack_forget()
             progress.pack_forget()
-
+            stream_switch.pack(pady=10, padx=10)
+            headless.pack(pady=10, padx=10)
+            mute.pack(pady=10, padx=10)
+            stream_bot_label.pack(pady=10, padx=10)
+            bots_watching.pack(pady=10, padx=10)
+            stream_link.pack(pady=10, padx=10)
+            stream_start_button.pack(pady=10, padx=10)
         else:
+            stream_switch.pack_forget()
+            headless.pack_forget()
+            mute.pack_forget()
+            stream_bot_label.pack_forget()
+            bots_watching.pack_forget()
+            stream_link.pack_forget()
+            stream_start_button.pack_forget()
+            stream_switch.pack(pady=10, padx=10)
             headless.pack(pady=10, padx=10)
             mute.pack(pady=10, padx=10)
             view_label.pack(pady=10, padx=10)
@@ -44,6 +59,10 @@ def main():
     def views_update(self):
         view_value = str(int(view_slider.get()))
         view_label.configure(text=f"{view_value} Views")
+
+    def stream_bots_update(self):
+        stream_bot_value = str(int(bots_watching.get()))
+        stream_bot_label.configure(text=f"{stream_bot_value} Bots")
 
     def update():
         def open_updates():
@@ -81,7 +100,7 @@ def main():
             update_close_button.pack()
 
     def start_bot():
-
+        stream_switch.pack_forget()
         chromedriver_autoinstaller.install()
         viewcount = 0
         drivers = []
@@ -133,25 +152,30 @@ def main():
                 for i in range(number_of_drivers):
                     drivers[i].refresh()
 
+    def stream_start():
+        stream_switch.pack_forget()
+
+    def stop_bot():
+        stream_switch.pack(pady=10, padx=10)
+
     # Border
     border = customtkinter.CTkFrame(master=app)
     border.pack(pady=20, padx=20, fill="both", expand=True)
 
     # Stream Option
-    stream_option = customtkinter.CTkSwitch(master=border, text="Stream Mode", command=stream_option)
-    stream_option.pack(pady=10, padx=10)
+    stream_switch = customtkinter.CTkSwitch(
+        master=border, text="Stream Mode", command=stream_option
+    )
+    stream_switch.pack(pady=10, padx=10)
 
     # Checkbox
     headless = customtkinter.CTkCheckBox(master=border, text="Headless Mode")
     headless.pack(pady=10, padx=10)
-
     mute = customtkinter.CTkCheckBox(master=border, text="Mute")
     mute.pack(pady=10, padx=10)
-
     # Bot Progress
     progress = customtkinter.CTkProgressBar(master=border)
     progress.set(0.0)
-
     # Number of views
     view_value = 20
     view_label = customtkinter.CTkLabel(
@@ -163,23 +187,34 @@ def main():
     view_label.pack(pady=10, padx=10)
     view_slider.pack(pady=10, padx=10)
     view_slider.set(20)
-
     # Number of tabs
     tab_box = customtkinter.CTkEntry(
         master=border, width=200, placeholder_text="Number of tabs"
     )
     tab_box.pack(pady=10, padx=10)
-
     # Watch time
     watchtime_box = customtkinter.CTkEntry(
         master=border, width=200, placeholder_text="Watch time (seconds)"
     )
     watchtime_box.pack(pady=10, padx=10)
-
     # Link
     link_box = customtkinter.CTkEntry(master=border, width=400, placeholder_text="Link")
     link_box.pack(pady=10, padx=10)
 
+    # Stream Menu
+    stream_bot_value = 20
+    stream_bot_label = customtkinter.CTkLabel(
+        master=border, justify=tkinter.LEFT, text=f"{stream_bot_value} Bots"
+    )
+    bots_watching = customtkinter.CTkSlider(
+        master=border, from_=1, to=50, command=stream_bots_update
+    )
+    stream_link = customtkinter.CTkEntry(
+        master=border, width=400, placeholder_text="Link"
+    )
+    stream_start_button = customtkinter.CTkButton(
+        master=border, text="Start Bot", command=stream_start
+    )
 
     # Start Button
     start_button = customtkinter.CTkButton(
@@ -188,6 +223,8 @@ def main():
         text="Start Bot",
     )
     start_button.pack(pady=10, padx=10)
+
+
 
     progress.pack(pady=10, padx=10)
 
