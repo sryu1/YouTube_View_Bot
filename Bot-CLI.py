@@ -127,9 +127,7 @@ def main():
             options = webdriver.ChromeOptions()
             if configs["Headless"] == 1:
                 options.add_argument("--headless")
-            if configs["Mute"] == 0:
-                pass
-            else:
+            if configs["Mute"] == 1:
                 options.add_argument("--mute-audio")
             options.add_experimental_option("excludeSwitches", ["enable-logging"])
             drivers.append(
